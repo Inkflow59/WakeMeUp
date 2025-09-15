@@ -17,16 +17,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var alarmAdapter: AlarmAdapter
+    private lateinit var permissionManager: PermissionManager
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
-        val allGranted = permissions.values.all { it }
-        if (allGranted) {
-            initializeLocationService()
-        } else {
-            Toast.makeText(this, "Les permissions de localisation sont nécessaires", Toast.LENGTH_LONG).show()
-        }
+        handlePermissionResults(permissions)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,19 +30,40 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        permissionManager = PermissionManager(this)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         setupRecyclerView()
         setupObservers()
         setupButtons()
 
-        checkPermissions()
+        checkAndRequestPermissions()
     }
 
     override fun onResume() {
         super.onResume()
-        // Rafraîchir la liste des alarmes à chaque retour sur l'écran principal
-        viewModel.refreshAlarms()
+        // Vérifier les permissions à chaque retour sur l'activité
+        // (cas où l'utilisateur revient des paramètres)
+        if (permissionManager.areAllPermissionsGranted()) {
+            initializeLocationService()
+            viewModel.refreshAlarms()
+
+            // Vérifier l'optimisation de batterie (optionnel)
+            if (!permissionManager.checkBatteryOptimization()) {
+                permissionManager.showBatteryOptimizationDialog()
+            }
+        } else {
+            // Si les permissions ne sont toujours pas accordées, redemander ou rediriger
+            val missingPermissions = permissionManager.getMissingPermissions()
+            val hasBeenAsked = missingPermissions.any { permission ->
+                permissionManager.isPermissionPermanentlyDenied(permission)
+            }
+
+            if (hasBeenAsked) {
+                // Redirection automatique vers les paramètres
+                permissionManager.showPermissionSettingsDialog()
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -72,43 +89,60 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupButtons() {
         binding.fabAddAlarm.setOnClickListener {
-            openAlarmEditor(null)
+            if (permissionManager.areAllPermissionsGranted()) {
+                openAlarmEditor(null)
+            } else {
+                Toast.makeText(this, "Les permissions de localisation sont requises pour créer une alarme", Toast.LENGTH_LONG).show()
+                checkAndRequestPermissions()
+            }
         }
     }
 
-    private fun checkPermissions() {
-        val permissionsNeeded = mutableListOf<String>()
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
-            permissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
-            permissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION)
-        }
-
-        // Permission d'arrière-plan pour Android 10+
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-                permissionsNeeded.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-            }
-        }
-
-        // Permission de notification pour Android 13+
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-                != PackageManager.PERMISSION_GRANTED) {
-                permissionsNeeded.add(Manifest.permission.POST_NOTIFICATIONS)
-            }
-        }
-
-        if (permissionsNeeded.isNotEmpty()) {
-            requestPermissionLauncher.launch(permissionsNeeded.toTypedArray())
-        } else {
+    private fun checkAndRequestPermissions() {
+        if (permissionManager.areAllPermissionsGranted()) {
             initializeLocationService()
+            return
+        }
+
+        val missingPermissions = permissionManager.getMissingPermissions()
+
+        // Vérifier si certaines permissions ont été refusées de manière permanente
+        val permanentlyDeniedPermissions = missingPermissions.filter { permission ->
+            permissionManager.isPermissionPermanentlyDenied(permission)
+        }
+
+        if (permanentlyDeniedPermissions.isNotEmpty()) {
+            // Redirection automatique vers les paramètres
+            permissionManager.showPermissionSettingsDialog()
+        } else {
+            // Afficher l'explication puis demander les permissions
+            permissionManager.showPermissionRationale {
+                requestPermissionLauncher.launch(missingPermissions.toTypedArray())
+            }
+        }
+    }
+
+    private fun handlePermissionResults(permissions: Map<String, Boolean>) {
+        val allGranted = permissions.values.all { it }
+
+        if (allGranted) {
+            initializeLocationService()
+            Toast.makeText(this, "Permissions accordées ! L'application est prête à être utilisée.", Toast.LENGTH_SHORT).show()
+        } else {
+            val deniedPermissions = permissions.filter { !it.value }.keys.toList()
+
+            // Vérifier si des permissions ont été refusées de manière permanente
+            val permanentlyDenied = deniedPermissions.any { permission ->
+                permissionManager.isPermissionPermanentlyDenied(permission)
+            }
+
+            if (permanentlyDenied) {
+                // Redirection automatique vers les paramètres
+                permissionManager.showPermissionSettingsDialog()
+            } else {
+                // L'utilisateur a refusé mais peut encore accorder les permissions
+                Toast.makeText(this, "Certaines permissions sont nécessaires pour le bon fonctionnement de l'application", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -122,6 +156,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openAlarmEditor(alarm: LocationAlarm?) {
+        if (!permissionManager.areAllPermissionsGranted()) {
+            Toast.makeText(this, "Les permissions de localisation sont requises", Toast.LENGTH_SHORT).show()
+            checkAndRequestPermissions()
+            return
+        }
+
         val intent = Intent(this, AlarmEditorActivity::class.java)
         alarm?.let { intent.putExtra("alarm", it) }
         startActivity(intent)

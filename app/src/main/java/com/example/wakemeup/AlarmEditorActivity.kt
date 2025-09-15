@@ -27,6 +27,7 @@ class AlarmEditorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAlarmEditorBinding
     private lateinit var alarmRepository: AlarmRepository
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var permissionManager: PermissionManager
     private lateinit var mapView: MapView
     private lateinit var mapController: IMapController
     private var selectedLocation: GeoPoint? = null
@@ -39,6 +40,13 @@ class AlarmEditorActivity : AppCompatActivity() {
     ) { isGranted ->
         if (isGranted) {
             enableMyLocation()
+        } else {
+            // Vérifier si la permission a été refusée de manière permanente
+            if (permissionManager.isPermissionPermanentlyDenied(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                permissionManager.showPermissionSettingsDialog()
+            } else {
+                Toast.makeText(this, "La permission de localisation est nécessaire pour utiliser la carte", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -51,14 +59,33 @@ class AlarmEditorActivity : AppCompatActivity() {
         binding = ActivityAlarmEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        permissionManager = PermissionManager(this)
         alarmRepository = AlarmRepository(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        // Vérifier les permissions avant de continuer
+        if (!permissionManager.areAllPermissionsGranted()) {
+            Toast.makeText(this, "Les permissions de localisation sont nécessaires pour créer une alarme", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
 
         // Récupérer l'alarme à éditer si elle existe
         editingAlarm = intent.getParcelableExtra("alarm")
 
         setupUI()
         setupMap()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+
+        // Vérifier les permissions au retour depuis les paramètres
+        if (!permissionManager.areAllPermissionsGranted()) {
+            Toast.makeText(this, "Les permissions de localisation sont requises", Toast.LENGTH_SHORT).show()
+            finish()
+        }
     }
 
     private fun setupUI() {
@@ -147,17 +174,24 @@ class AlarmEditorActivity : AppCompatActivity() {
 
     private fun getCurrentLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED) {
+            != PackageManager.PERMISSION_GRANTED) {
+            // Vérifier si la permission a été refusée de manière permanente
+            if (permissionManager.isPermissionPermanentlyDenied(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                permissionManager.showPermissionSettingsDialog()
+            } else {
+                requestLocationPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+            return
+        }
 
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                location?.let {
-                    val geoPoint = GeoPoint(it.latitude, it.longitude)
-                    selectedLocation = geoPoint
-                    mapController.animateTo(geoPoint)
-                    mapController.setZoom(15.0)
-                    updateMapMarker()
-                    updateAddressFromLocation(geoPoint)
-                }
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            location?.let {
+                val geoPoint = GeoPoint(it.latitude, it.longitude)
+                selectedLocation = geoPoint
+                mapController.animateTo(geoPoint)
+                mapController.setZoom(15.0)
+                updateMapMarker()
+                updateAddressFromLocation(geoPoint)
             }
         }
     }
@@ -325,11 +359,6 @@ class AlarmEditorActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.save_error, e.message), Toast.LENGTH_LONG).show()
             android.util.Log.e("AlarmEditorActivity", "Erreur lors de la sauvegarde", e)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mapView.onResume()
     }
 
     override fun onPause() {

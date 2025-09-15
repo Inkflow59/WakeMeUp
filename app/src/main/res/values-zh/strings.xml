@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Wake Me Up</string>
+
+    <!-- Main Activity -->
+    <string name="main_title">我的GPS闹钟</string>
+    <string name="no_alarms_message">没有配置闹钟。\n点击+创建一个。</string>
+    <string name="add_alarm_description">添加闹钟</string>
+
+    <!-- Alarm Editor Activity -->
+    <string name="alarm_name_hint">闹钟名称</string>
+    <string name="search_address_hint">搜索地址</string>
+    <string name="search_button">搜索</string>
+    <string name="use_current_location">📍 使用我的当前位置</string>
+    <string name="activation_radius_label">激活半径</string>
+    <string name="radius_format">半径：%1$d米</string>
+    <string name="alarm_options_label">闹钟选项</string>
+    <string name="sound_option">🔊 声音</string>
+    <string name="vibration_option">📳 振动</string>
+    <string name="cancel_button">取消</string>
+    <string name="save_button">保存</string>
+    <string name="new_alarm_title">新闹钟</string>
+    <string name="edit_alarm_title">编辑闹钟</string>
+
+    <!-- Alarm Item -->
+    <string name="alarm_name_default">闹钟名称</string>
+    <string name="gps_position">GPS位置</string>
+
+    <!-- Toast Messages -->
+    <string name="enter_address_message">请输入地址</string>
+    <string name="address_not_found">未找到地址</string>
+    <string name="address_search_error">搜索地址时出错</string>
+    <string name="map_loading_error">加载OpenStreetMap时出错</string>
+    <string name="select_position_message">请在地图上选择位置或输入地址</string>
+    <string name="alarm_saved">闹钟已保存</string>
+    <string name="save_error">保存错误：%1$s</string>
+    <string name="unnamed_alarm">未命名闹钟</string>
+    <string name="coordinates_alarm">闹钟 %1$s，%2$s</string>
+
+    <!-- Map -->
+    <string name="alarm_position_marker">闹钟位置</string>
+</resources>
+

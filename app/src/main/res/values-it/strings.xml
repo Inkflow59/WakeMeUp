@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Wake Me Up</string>
+
+    <!-- Main Activity -->
+    <string name="main_title">Le Mie Sveglie GPS</string>
+    <string name="no_alarms_message">Nessuna sveglia configurata.\nTocca + per crearne una.</string>
+    <string name="add_alarm_description">Aggiungi sveglia</string>
+
+    <!-- Alarm Editor Activity -->
+    <string name="alarm_name_hint">Nome della sveglia</string>
+    <string name="search_address_hint">Cerca un indirizzo</string>
+    <string name="search_button">Cerca</string>
+    <string name="use_current_location">📍 Usa la mia posizione attuale</string>
+    <string name="activation_radius_label">Raggio di attivazione</string>
+    <string name="radius_format">Raggio: %1$dm</string>
+    <string name="alarm_options_label">Opzioni sveglia</string>
+    <string name="sound_option">🔊 Suono</string>
+    <string name="vibration_option">📳 Vibrazione</string>
+    <string name="cancel_button">Annulla</string>
+    <string name="save_button">Salva</string>
+    <string name="new_alarm_title">Nuova sveglia</string>
+    <string name="edit_alarm_title">Modifica sveglia</string>
+
+    <!-- Alarm Item -->
+    <string name="alarm_name_default">Nome della sveglia</string>
+    <string name="gps_position">Posizione GPS</string>
+
+    <!-- Toast Messages -->
+    <string name="enter_address_message">Inserisci un indirizzo</string>
+    <string name="address_not_found">Indirizzo non trovato</string>
+    <string name="address_search_error">Errore nella ricerca dell\'indirizzo</string>
+    <string name="map_loading_error">Errore nel caricamento di OpenStreetMap</string>
+    <string name="select_position_message">Seleziona una posizione sulla mappa o inserisci un indirizzo</string>
+    <string name="alarm_saved">Sveglia salvata</string>
+    <string name="save_error">Errore di salvataggio: %1$s</string>
+    <string name="unnamed_alarm">Sveglia senza nome</string>
+    <string name="coordinates_alarm">Sveglia %1$s, %2$s</string>
+
+    <!-- Map -->
+    <string name="alarm_position_marker">Posizione della sveglia</string>
+</resources>
+

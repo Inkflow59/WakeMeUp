@@ -1,4 +1,4 @@
-# 📍 WakeMeUp - Réveil Géographique
+# 📍 WakeMeUp - Location-Based Alarm
 
 <div align="center">
 
@@ -7,94 +7,94 @@
 ![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-Free-7EBC6F?style=for-the-badge&logo=openstreetmap&logoColor=white)
 ![GPS](https://img.shields.io/badge/GPS-Location-FF6B35?style=for-the-badge&logo=location&logoColor=white)
 
-*Ne ratez plus jamais votre arrêt ! Réveillez-vous automatiquement quand vous approchez de votre destination.*
+*Never miss your stop again! Wake up automatically when you approach your destination.*
 
 </div>
 
-## 🎯 À propos
+## 🎯 About
 
-**WakeMeUp** est une application Android innovante qui vous permet de créer des alarmes basées sur votre position géographique plutôt que sur l'heure. Parfait pour :
+**WakeMeUp** is an innovative Android application that allows you to create alarms based on your geographical location rather than time. Perfect for:
 
-- 🚊 **Transports en commun** : Dormez tranquillement, l'app vous réveille à votre arrêt
-- 🚗 **Voyages en voiture** : Idéal pour les passagers lors de longs trajets
-- ✈️ **Voyages** : Ne manquez plus vos correspondances ou destinations
-- 🏃 **Sport** : Réveil pour vos points de passage lors de courses longues
+- 🚊 **Public Transportation**: Sleep peacefully, the app wakes you up at your stop
+- 🚗 **Car Travel**: Ideal for passengers during long journeys
+- ✈️ **Travel**: Never miss your connections or destinations again
+- 🏃 **Sports**: Wake-up calls for your checkpoints during long runs
 
-## ✨ Fonctionnalités
+## ✨ Features
 
-### 🎛️ Gestion des Alarmes
-- **Création intuitive** : Interface simple avec carte interactive OpenStreetMap
-- **Personnalisation complète** : Nom, position, rayon d'activation (10m - 1km)
-- **Options flexibles** : Son, vibration, activation/désactivation
-- **Recherche d'adresse** : Trouvez facilement vos destinations
+### 🎛️ Alarm Management
+- **Intuitive Creation**: Simple interface with interactive OpenStreetMap
+- **Complete Customization**: Name, position, activation radius (10m - 1km)
+- **Flexible Options**: Sound, vibration, enable/disable
+- **Address Search**: Easily find your destinations
 
-### 📍 Technologie de Géolocalisation
-- **Surveillance continue** : Service en arrière-plan optimisé
-- **Précision GPS** : Utilise la géolocalisation fine
-- **Économie d'énergie** : Gestion intelligente de la batterie
-- **Fonctionnement offline** : Pas besoin d'internet une fois les cartes téléchargées
+### 📍 Geolocation Technology
+- **Continuous Monitoring**: Optimized background service
+- **GPS Precision**: Uses fine location services
+- **Power Efficient**: Intelligent battery management
+- **Offline Operation**: No internet needed once maps are downloaded
 
-### 🔔 Système d'Alerte
-- **Notifications push** : Alertes immédiates et visibles
-- **Son d'alarme** : Sonnerie forte et personnalisable
-- **Vibration** : Réveil tactile même en mode silencieux
-- **Auto-désactivation** : L'alarme se désactive après déclenchement
+### 🔔 Alert System
+- **Push Notifications**: Immediate and visible alerts
+- **Alarm Sound**: Loud and customizable ringtone
+- **Vibration**: Tactile wake-up even in silent mode
+- **Auto-Deactivation**: Alarm deactivates after triggering
 
-## 📱 Captures d'écran
+## 📱 Screenshots
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   📋 Liste      │    │   🗺️ Carte OSM  │    │   ⚙️ Config     │
-│   des Alarmes   │    │   Interactive   │    │   Alarme        │
+│   📋 Alarm      │    │   🗺️ Interactive│    │   ⚙️ Alarm      │
+│   List          │    │   OSM Map       │    │   Config        │
 │                 │    │                 │    │                 │
-│ • Maison        │    │    📍 Marker    │    │ Nom: Bureau     │
-│ • Bureau   ✅   │    │    ⭕ Zone      │    │ Rayon: 200m     │
-│ • Gare     ❌   │    │                 │    │ 🔊 Son: ON      │
-│ • Aéroport ✅   │    │                 │    │ 📳 Vibr: ON     │
+│ • Home          │    │    📍 Marker    │    │ Name: Office    │
+│ • Office   ✅   │    │    ⭕ Zone      │    │ Radius: 200m    │
+│ • Station  ❌   │    │                 │    │ 🔊 Sound: ON    │
+│ • Airport  ✅   │    │                 │    │ 📳 Vibr: ON     │
 │                 │    │                 │    │                 │
-│     [+]         │    │   [Sauver]      │    │   [Sauvegarder] │
+│     [+]         │    │   [Save]        │    │   [Save]        │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
 ## 🚀 Installation
 
-### Prérequis
-- **Android 5.0** (API 21) ou supérieur
-- **Connexion internet** (pour télécharger les cartes)
-- **GPS** activé sur l'appareil
+### Prerequisites
+- **Android 5.0** (API 21) or higher
+- **Internet connection** (to download maps)
+- **GPS** enabled on device
 
-### Étapes d'installation
+### Installation Steps
 
-1. **Cloner le projet**
+1. **Clone the project**
    ```bash
-   git clone https://github.com/votre-username/wakemeup.git
+   git clone https://github.com/your-username/wakemeup.git
    cd wakemeup
    ```
 
-2. **Ouvrir dans Android Studio**
-   - Ouvrir Android Studio
-   - File → Open → Sélectionner le dossier du projet
+2. **Open in Android Studio**
+   - Open Android Studio
+   - File → Open → Select project folder
 
-3. **Compiler et installer**
+3. **Build and install**
    ```bash
    ./gradlew assembleDebug
    ./gradlew installDebug
    ```
 
-**🎉 Aucune configuration supplémentaire nécessaire !** L'application utilise OpenStreetMap qui ne nécessite pas de clé API.
+**🎉 No additional configuration required!** The app uses OpenStreetMap which doesn't require an API key.
 
 ## 🔧 Configuration
 
-### Permissions requises
+### Required Permissions
 
-L'application demande automatiquement les permissions suivantes :
+The app automatically requests the following permissions:
 
 ```xml
-<!-- Géolocalisation -->
+<!-- Geolocation -->
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
-<!-- Notifications et réveil -->
+<!-- Notifications and wake-up -->
 <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 <uses-permission android:name="android.permission.VIBRATE" />
@@ -105,137 +105,137 @@ L'application demande automatiquement les permissions suivantes :
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
-### Optimisation de la batterie
+### Battery Optimization
 
-Pour un fonctionnement optimal, désactivez l'optimisation de batterie pour WakeMeUp :
+For optimal operation, disable battery optimization for WakeMeUp:
 
-1. **Paramètres** → **Batterie** → **Optimisation de la batterie**
-2. Rechercher **WakeMeUp**
-3. Sélectionner **"Ne pas optimiser"**
+1. **Settings** → **Battery** → **Battery Optimization**
+2. Search for **WakeMeUp**
+3. Select **"Don't optimize"**
 
-## 📖 Guide d'utilisation
+## 📖 User Guide
 
-### 1. Créer votre première alarme
+### 1. Create your first alarm
 
-1. **Ouvrir l'application** et appuyer sur le bouton **[+]**
-2. **Nommer votre alarme** (ex: "Arrêt Châtelet")
-3. **Définir la position** :
-   - 📍 Utiliser votre position actuelle
-   - 🔍 Rechercher une adresse
-   - 🗺️ Cliquer directement sur la carte
-4. **Configurer le rayon** d'activation (recommandé: 100-200m)
-5. **Activer le son et/ou la vibration**
-6. **Sauvegarder**
+1. **Open the app** and tap the **[+]** button
+2. **Name your alarm** (e.g., "Châtelet Stop")
+3. **Set the position**:
+   - 📍 Use your current location
+   - 🔍 Search for an address
+   - 🗺️ Click directly on the map
+4. **Configure the activation radius** (recommended: 100-200m)
+5. **Enable sound and/or vibration**
+6. **Save**
 
-### 2. Utiliser l'alarme
+### 2. Use the alarm
 
-1. **Activer l'alarme** dans la liste principale
-2. **Lancer votre trajet** - l'app surveille votre position en arrière-plan
-3. **Être alerté** automatiquement quand vous approchez de la destination
-4. **Se réveiller** grâce au son et à la vibration
+1. **Activate the alarm** in the main list
+2. **Start your journey** - the app monitors your position in the background
+3. **Get alerted** automatically when you approach the destination
+4. **Wake up** thanks to sound and vibration
 
-### 3. Gestion avancée
+### 3. Advanced Management
 
-- **✏️ Modifier** : Cliquer sur "Modifier" pour changer les paramètres
-- **🔄 Activer/Désactiver** : Utiliser le switch pour activer/désactiver temporairement
-- **🗑️ Supprimer** : Cliquer sur "Supprimer" pour effacer définitivement
+- **✏️ Edit**: Click "Edit" to change settings
+- **🔄 Enable/Disable**: Use the switch to temporarily enable/disable
+- **🗑️ Delete**: Click "Delete" to permanently remove
 
 ## 🏗️ Architecture
 
-### Structure du projet
+### Project Structure
 
 ```
 app/
-├── 📱 MainActivity.kt          # Écran principal
-├── ✏️ AlarmEditorActivity.kt   # Création/modification d'alarmes
-├── 📍 LocationService.kt       # Service de géolocalisation
-├── 💾 AlarmRepository.kt       # Gestion des données
-├── 📋 AlarmAdapter.kt          # Affichage de la liste
-├── 🏠 LocationAlarm.kt         # Modèle de données
-└── 🎛️ MainViewModel.kt        # Logique métier
+├── 📱 MainActivity.kt          # Main screen
+├── ✏️ AlarmEditorActivity.kt   # Alarm creation/modification
+├── 📍 LocationService.kt       # Geolocation service
+├── 💾 AlarmRepository.kt       # Data management
+├── 📋 AlarmAdapter.kt          # List display
+├── 🏠 LocationAlarm.kt         # Data model
+└── 🎛️ MainViewModel.kt        # Business logic
 ```
 
-### Technologies utilisées
+### Technologies Used
 
-- **Language** : Kotlin
-- **Architecture** : MVVM (Model-View-ViewModel)
-- **Géolocalisation** : Google Play Services Location
-- **Cartes** : Google Maps Android API
-- **Stockage** : SharedPreferences + Gson
-- **Interface** : Material Design Components
-- **Services** : Foreground Service pour le background
+- **Language**: Kotlin
+- **Architecture**: MVVM (Model-View-ViewModel)
+- **Geolocation**: Google Play Services Location
+- **Maps**: OpenStreetMap with osmdroid
+- **Storage**: SharedPreferences + Gson
+- **Interface**: Material Design Components
+- **Services**: Foreground Service for background operation
 
-### Composants clés
+### Key Components
 
-| Composant | Rôle | Technologie |
+| Component | Role | Technology |
 |-----------|------|-------------|
-| `LocationService` | Surveillance GPS en arrière-plan | FusedLocationProviderClient |
-| `AlarmRepository` | Persistance des données | SharedPreferences + Gson |
-| `MainActivity` | Interface principale | RecyclerView + LiveData |
-| `AlarmEditorActivity` | Configuration des alarmes | Google Maps Fragment |
+| `LocationService` | Background GPS monitoring | FusedLocationProviderClient |
+| `AlarmRepository` | Data persistence | SharedPreferences + Gson |
+| `MainActivity` | Main interface | RecyclerView + LiveData |
+| `AlarmEditorActivity` | Alarm configuration | OpenStreetMap |
 
-## 🔒 Confidentialité
+## 🔒 Privacy
 
-- **Données locales** : Toutes les données sont stockées localement sur votre appareil
-- **Pas de serveur** : Aucune donnée n'est envoyée vers des serveurs externes
-- **GPS uniquement** : Seule la position GPS est utilisée, pas d'autres données personnelles
-- **Transparent** : Code source ouvert et auditable
+- **Local Data**: All data is stored locally on your device
+- **No Server**: No data is sent to external servers
+- **GPS Only**: Only GPS location is used, no other personal data
+- **Transparent**: Open source code, auditable
 
-## 🐛 Résolution de problèmes
+## 🐛 Troubleshooting
 
-### L'alarme ne se déclenche pas
+### Alarm doesn't trigger
 
-- ✅ Vérifier que l'alarme est **activée** (switch vert)
-- ✅ Confirmer que les **permissions de géolocalisation** sont accordées
-- ✅ Désactiver l'**optimisation de batterie** pour l'app
-- ✅ Vérifier que le **GPS est activé** sur l'appareil
-- ✅ S'assurer d'être dans la **zone définie** (rayon configuré)
+- ✅ Check that the alarm is **enabled** (green switch)
+- ✅ Confirm that **location permissions** are granted
+- ✅ Disable **battery optimization** for the app
+- ✅ Verify that **GPS is enabled** on the device
+- ✅ Ensure you're within the **defined zone** (configured radius)
 
-### L'app se ferme en arrière-plan
+### App closes in background
 
-- ✅ Désactiver l'**optimisation de batterie** pour WakeMeUp
-- ✅ Ajouter l'app aux **applications protégées** (selon le fabricant)
-- ✅ Vérifier dans **Paramètres** → **Applications** → **Autorisation spéciale**
+- ✅ Disable **battery optimization** for WakeMeUp
+- ✅ Add the app to **protected applications** (manufacturer dependent)
+- ✅ Check in **Settings** → **Apps** → **Special Permissions**
 
-### GPS imprécis
+### Inaccurate GPS
 
-- ✅ Activer la **géolocalisation haute précision**
-- ✅ Être dans un **environnement ouvert** (éviter les tunnels/bâtiments)
-- ✅ Augmenter le **rayon d'activation** si nécessaire
+- ✅ Enable **high-precision location**
+- ✅ Be in an **open environment** (avoid tunnels/buildings)
+- ✅ Increase the **activation radius** if necessary
 
-## 🤝 Contribution
+## 🤝 Contributing
 
-Les contributions sont les bienvenues ! Pour contribuer :
+Contributions are welcome! To contribute:
 
-1. **Fork** le projet
-2. Créer une **branche feature** (`git checkout -b feature/nouvelle-fonctionnalite`)
-3. **Commit** vos changements (`git commit -m 'Ajout nouvelle fonctionnalité'`)
-4. **Push** vers la branche (`git push origin feature/nouvelle-fonctionnalite`)
-5. Ouvrir une **Pull Request**
+1. **Fork** the project
+2. Create a **feature branch** (`git checkout -b feature/new-feature`)
+3. **Commit** your changes (`git commit -m 'Add new feature'`)
+4. **Push** to the branch (`git push origin feature/new-feature`)
+5. Open a **Pull Request**
 
-### Idées d'améliorations
+### Improvement Ideas
 
-- 🌙 **Mode nuit** pour l'interface
-- 📊 **Statistiques** d'utilisation des alarmes
-- 🎵 **Sons personnalisés** pour les alarmes
-- 🌐 **Support multi-langues**
-- ⏰ **Alarmes combinées** (heure + position)
-- 📱 **Widget** pour l'écran d'accueil
+- 🌙 **Dark mode** for the interface
+- 📊 **Usage statistics** for alarms
+- 🎵 **Custom sounds** for alarms
+- 🌐 **Multi-language support**
+- ⏰ **Combined alarms** (time + location)
+- 📱 **Home screen widget**
 
-## 📄 Licence
+## 📄 License
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+This project is under MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## 👨‍💻 Développeur
+## 👨‍💻 Developer
 
-Développé avec ❤️ pour rendre les voyages plus sereins.
+Developed with ❤️ to make travel more peaceful.
 
 ---
 
 <div align="center">
 
-**⭐ N'hésitez pas à donner une étoile si ce projet vous aide ! ⭐**
+**⭐ Don't hesitate to star this project if it helps you! ⭐**
 
-*WakeMeUp - Parce que votre destination compte plus que l'heure*
+*WakeMeUp - Because your destination matters more than time*
 
 </div>

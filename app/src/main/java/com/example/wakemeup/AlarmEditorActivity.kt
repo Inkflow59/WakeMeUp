@@ -92,7 +92,7 @@ class AlarmEditorActivity : AppCompatActivity() {
         binding.buttonSearchAddress.setOnClickListener { searchAddress() }
 
         // Titre
-        title = if (editingAlarm == null) "Nouvelle alarme" else "Modifier l'alarme"
+        title = if (editingAlarm == null) getString(R.string.new_alarm_title) else getString(R.string.edit_alarm_title)
     }
 
     private fun setupMap() {
@@ -132,7 +132,7 @@ class AlarmEditorActivity : AppCompatActivity() {
             enableMyLocation()
         } catch (e: Exception) {
             android.util.Log.e("AlarmEditorActivity", "Erreur lors de l'initialisation de la carte", e)
-            Toast.makeText(this, "Erreur lors du chargement de la carte OpenStreetMap", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.map_loading_error), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -165,7 +165,7 @@ class AlarmEditorActivity : AppCompatActivity() {
     private fun searchAddress() {
         val address = binding.editTextAddress.text.toString().trim()
         if (address.isEmpty()) {
-            Toast.makeText(this, "Veuillez entrer une adresse", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.enter_address_message), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -181,10 +181,10 @@ class AlarmEditorActivity : AppCompatActivity() {
                 mapController.setZoom(15.0)
                 updateMapMarker()
             } else {
-                Toast.makeText(this, "Adresse non trouvée", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.address_not_found), Toast.LENGTH_SHORT).show()
             }
         } catch (e: IOException) {
-            Toast.makeText(this, "Erreur lors de la recherche d'adresse", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.address_search_error), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -212,7 +212,7 @@ class AlarmEditorActivity : AppCompatActivity() {
             // Créer un nouveau marqueur
             locationMarker = Marker(mapView).apply {
                 position = location
-                title = "Position de l'alarme"
+                title = getString(R.string.alarm_position_marker)
                 setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
             }
 
@@ -255,7 +255,7 @@ class AlarmEditorActivity : AppCompatActivity() {
 
     private fun updateRadiusText() {
         val radius = binding.seekBarRadius.progress
-        binding.textViewRadius.text = "Rayon: ${radius}m"
+        binding.textViewRadius.text = getString(R.string.radius_format, radius)
     }
 
     private fun saveAlarm() {
@@ -281,7 +281,7 @@ class AlarmEditorActivity : AppCompatActivity() {
         }
 
         if (location == null) {
-            Toast.makeText(this, "Veuillez sélectionner une position sur la carte ou entrer une adresse", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.select_position_message), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -291,13 +291,17 @@ class AlarmEditorActivity : AppCompatActivity() {
                 val geocoder = Geocoder(this, Locale.getDefault())
                 val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
                 if (!addresses.isNullOrEmpty()) {
-                    name = addresses[0].getAddressLine(0) ?: "Alarme sans nom"
+                    name = addresses[0].getAddressLine(0) ?: getString(R.string.unnamed_alarm)
                 } else {
-                    name = "Alarme ${String.format(Locale.getDefault(), "%.4f", location.latitude)}, ${String.format(Locale.getDefault(), "%.4f", location.longitude)}"
+                    name = getString(R.string.coordinates_alarm,
+                        String.format(Locale.getDefault(), "%.4f", location.latitude),
+                        String.format(Locale.getDefault(), "%.4f", location.longitude))
                 }
             } catch (e: IOException) {
                 // Si le géocodage inverse échoue, utiliser les coordonnées
-                name = "Alarme ${String.format(Locale.getDefault(), "%.4f", location.latitude)}, ${String.format(Locale.getDefault(), "%.4f", location.longitude)}"
+                name = getString(R.string.coordinates_alarm,
+                    String.format(Locale.getDefault(), "%.4f", location.latitude),
+                    String.format(Locale.getDefault(), "%.4f", location.longitude))
                 android.util.Log.e("AlarmEditorActivity", "Erreur de géocodage inverse", e)
             }
         }
@@ -315,10 +319,10 @@ class AlarmEditorActivity : AppCompatActivity() {
             )
 
             alarmRepository.saveAlarm(alarm)
-            Toast.makeText(this, "Alarme sauvegardée", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.alarm_saved), Toast.LENGTH_SHORT).show()
             finish()
         } catch (e: Exception) {
-            Toast.makeText(this, "Erreur lors de la sauvegarde: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.save_error, e.message), Toast.LENGTH_LONG).show()
             android.util.Log.e("AlarmEditorActivity", "Erreur lors de la sauvegarde", e)
         }
     }

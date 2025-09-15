@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Wake Me Up</string>
+
+    <!-- Main Activity -->
+    <string name="main_title">My GPS Alarms</string>
+    <string name="no_alarms_message">No alarms configured.\nTap + to create one.</string>
+    <string name="add_alarm_description">Add alarm</string>
+
+    <!-- Alarm Editor Activity -->
+    <string name="alarm_name_hint">Alarm name</string>
+    <string name="search_address_hint">Search for an address</string>
+    <string name="search_button">Search</string>
+    <string name="use_current_location">📍 Use my current location</string>
+    <string name="activation_radius_label">Activation radius</string>
+    <string name="radius_format">Radius: %1$dm</string>
+    <string name="alarm_options_label">Alarm options</string>
+    <string name="sound_option">🔊 Sound</string>
+    <string name="vibration_option">📳 Vibration</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="save_button">Save</string>
+    <string name="new_alarm_title">New alarm</string>
+    <string name="edit_alarm_title">Edit alarm</string>
+
+    <!-- Alarm Item -->
+    <string name="alarm_name_default">Alarm name</string>
+    <string name="gps_position">GPS position</string>
+
+    <!-- Toast Messages -->
+    <string name="enter_address_message">Please enter an address</string>
+    <string name="address_not_found">Address not found</string>
+    <string name="address_search_error">Error searching for address</string>
+    <string name="map_loading_error">Error loading OpenStreetMap</string>
+    <string name="select_position_message">Please select a position on the map or enter an address</string>
+    <string name="alarm_saved">Alarm saved</string>
+    <string name="save_error">Save error: %1$s</string>
+    <string name="unnamed_alarm">Unnamed alarm</string>
+    <string name="coordinates_alarm">Alarm %1$s, %2$s</string>
+
+    <!-- Map -->
+    <string name="alarm_position_marker">Alarm position</string>
+</resources>
+

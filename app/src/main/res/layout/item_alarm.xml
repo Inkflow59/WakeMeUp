@@ -23,7 +23,7 @@
                 android:id="@+id/textViewAlarmName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nom de l'alarme"
+                android:text="@string/alarm_name_default"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Position GPS"
+                android:text="@string/gps_position"
                 android:textSize="14sp" />
 
             <TextView
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Rayon: 100m"
+                android:text="@string/radius_format"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -49,7 +49,7 @@
             android:id="@+id/switchActive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true" />
+            android:layout_marginStart="16dp" />
 
     </LinearLayout>
 

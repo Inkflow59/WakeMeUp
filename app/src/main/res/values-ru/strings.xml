@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Wake Me Up</string>
+
+    <!-- Main Activity -->
+    <string name="main_title">Мои GPS-будильники</string>
+    <string name="no_alarms_message">Нет настроенных будильников.\nНажмите +, чтобы создать один.</string>
+    <string name="add_alarm_description">Добавить будильник</string>
+
+    <!-- Alarm Editor Activity -->
+    <string name="alarm_name_hint">Название будильника</string>
+    <string name="search_address_hint">Поиск адреса</string>
+    <string name="search_button">Поиск</string>
+    <string name="use_current_location">📍 Использовать мое текущее местоположение</string>
+    <string name="activation_radius_label">Радиус активации</string>
+    <string name="radius_format">Радиус: %1$dм</string>
+    <string name="alarm_options_label">Настройки будильника</string>
+    <string name="sound_option">🔊 Звук</string>
+    <string name="vibration_option">📳 Вибрация</string>
+    <string name="cancel_button">Отмена</string>
+    <string name="save_button">Сохранить</string>
+    <string name="new_alarm_title">Новый будильник</string>
+    <string name="edit_alarm_title">Редактировать будильник</string>
+
+    <!-- Alarm Item -->
+    <string name="alarm_name_default">Название будильника</string>
+    <string name="gps_position">GPS позиция</string>
+
+    <!-- Toast Messages -->
+    <string name="enter_address_message">Пожалуйста, введите адрес</string>
+    <string name="address_not_found">Адрес не найден</string>
+    <string name="address_search_error">Ошибка поиска адреса</string>
+    <string name="map_loading_error">Ошибка загрузки OpenStreetMap</string>
+    <string name="select_position_message">Пожалуйста, выберите позицию на карте или введите адрес</string>
+    <string name="alarm_saved">Будильник сохранен</string>
+    <string name="save_error">Ошибка сохранения: %1$s</string>
+    <string name="unnamed_alarm">Безымянный будильник</string>
+    <string name="coordinates_alarm">Будильник %1$s, %2$s</string>
+
+    <!-- Map -->
+    <string name="alarm_position_marker">Позиция будильника</string>
+</resources>
+

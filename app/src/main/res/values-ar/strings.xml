@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Wake Me Up</string>
+
+    <!-- Main Activity -->
+    <string name="main_title">منبهاتي GPS</string>
+    <string name="no_alarms_message">لا توجد منبهات مُكونة.\nاضغط على + لإنشاء واحد.</string>
+    <string name="add_alarm_description">إضافة منبه</string>
+
+    <!-- Alarm Editor Activity -->
+    <string name="alarm_name_hint">اسم المنبه</string>
+    <string name="search_address_hint">البحث عن عنوان</string>
+    <string name="search_button">بحث</string>
+    <string name="use_current_location">📍 استخدام موقعي الحالي</string>
+    <string name="activation_radius_label">نطاق التفعيل</string>
+    <string name="radius_format">النطاق: %1$d متر</string>
+    <string name="alarm_options_label">خيارات المنبه</string>
+    <string name="sound_option">🔊 صوت</string>
+    <string name="vibration_option">📳 اهتزاز</string>
+    <string name="cancel_button">إلغاء</string>
+    <string name="save_button">حفظ</string>
+    <string name="new_alarm_title">منبه جديد</string>
+    <string name="edit_alarm_title">تعديل المنبه</string>
+
+    <!-- Alarm Item -->
+    <string name="alarm_name_default">اسم المنبه</string>
+    <string name="gps_position">موقع GPS</string>
+
+    <!-- Toast Messages -->
+    <string name="enter_address_message">يرجى إدخال عنوان</string>
+    <string name="address_not_found">العنوان غير موجود</string>
+    <string name="address_search_error">خطأ في البحث عن العنوان</string>
+    <string name="map_loading_error">خطأ في تحميل OpenStreetMap</string>
+    <string name="select_position_message">يرجى تحديد موقع على الخريطة أو إدخال عنوان</string>
+    <string name="alarm_saved">تم حفظ المنبه</string>
+    <string name="save_error">خطأ في الحفظ: %1$s</string>
+    <string name="unnamed_alarm">منبه بدون اسم</string>
+    <string name="coordinates_alarm">منبه %1$s، %2$s</string>
+
+    <!-- Map -->
+    <string name="alarm_position_marker">موقع المنبه</string>
+</resources>
+

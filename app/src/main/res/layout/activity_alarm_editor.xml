@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:hint="Nom de l'alarme"
+            android:hint="@string/alarm_name_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:hint="Rechercher une adresse"
+            android:hint="@string/search_address_hint"
             app:layout_constraintEnd_toStartOf="@+id/buttonSearchAddress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName">
@@ -54,7 +54,7 @@
             android:id="@+id/buttonSearchAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chercher"
+            android:text="@string/search_button"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutAddress"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="📍 Utiliser ma position actuelle"
+            android:text="@string/use_current_location"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Rayon d'activation"
+            android:text="@string/activation_radius_label"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,7 @@
             android:id="@+id/textViewRadius"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rayon: 100m"
+            android:text="@string/radius_format"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/labelRadius" />
@@ -119,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Options de l'alarme"
+            android:text="@string/alarm_options_label"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:padding="8dp"
-                android:text="🔊 Son"
+                android:text="@string/sound_option"
                 android:textSize="16sp" />
 
             <androidx.appcompat.widget.SwitchCompat
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:padding="8dp"
-                android:text="📳 Vibration"
+                android:text="@string/vibration_option"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:text="Annuler"
+                android:text="@string/cancel_button"
                 android:textAllCaps="false" />
 
             <Button
@@ -180,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:text="Sauvegarder"
+                android:text="@string/save_button"
                 android:textAllCaps="false" />
 
         </LinearLayout>

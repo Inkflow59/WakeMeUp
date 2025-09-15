@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Wake Me Up</string>
+
+    <!-- Main Activity -->
+    <string name="main_title">Meus Alarmes GPS</string>
+    <string name="no_alarms_message">Nenhum alarme configurado.\nToque em + para criar um.</string>
+    <string name="add_alarm_description">Adicionar alarme</string>
+
+    <!-- Alarm Editor Activity -->
+    <string name="alarm_name_hint">Nome do alarme</string>
+    <string name="search_address_hint">Procurar um endereço</string>
+    <string name="search_button">Procurar</string>
+    <string name="use_current_location">📍 Usar minha localização atual</string>
+    <string name="activation_radius_label">Raio de ativação</string>
+    <string name="radius_format">Raio: %1$dm</string>
+    <string name="alarm_options_label">Opções do alarme</string>
+    <string name="sound_option">🔊 Som</string>
+    <string name="vibration_option">📳 Vibração</string>
+    <string name="cancel_button">Cancelar</string>
+    <string name="save_button">Salvar</string>
+    <string name="new_alarm_title">Novo alarme</string>
+    <string name="edit_alarm_title">Editar alarme</string>
+
+    <!-- Alarm Item -->
+    <string name="alarm_name_default">Nome do alarme</string>
+    <string name="gps_position">Posição GPS</string>
+
+    <!-- Toast Messages -->
+    <string name="enter_address_message">Por favor, digite um endereço</string>
+    <string name="address_not_found">Endereço não encontrado</string>
+    <string name="address_search_error">Erro ao procurar endereço</string>
+    <string name="map_loading_error">Erro ao carregar OpenStreetMap</string>
+    <string name="select_position_message">Por favor, selecione uma posição no mapa ou digite um endereço</string>
+    <string name="alarm_saved">Alarme salvo</string>
+    <string name="save_error">Erro ao salvar: %1$s</string>
+    <string name="unnamed_alarm">Alarme sem nome</string>
+    <string name="coordinates_alarm">Alarme %1$s, %2$s</string>
+
+    <!-- Map -->
+    <string name="alarm_position_marker">Posição do alarme</string>
+</resources>
+

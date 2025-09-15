@@ -14,6 +14,7 @@ import android.os.IBinder
 import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.provider.AlarmClock
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.*
 
@@ -38,7 +39,12 @@ class LocationService : Service() {
 
         alarmRepository = AlarmRepository(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
+        vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            getSystemService(Vibrator::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            getSystemService(VIBRATOR_SERVICE) as Vibrator
+        }
 
         createNotificationChannels()
         setupLocationCallback()
@@ -121,7 +127,7 @@ class LocationService : Service() {
                 locationCallback,
                 Looper.getMainLooper()
             )
-        } catch (securityException: SecurityException) {
+        } catch (_: SecurityException) {
             // Les permissions ne sont pas accordées
         }
     }
@@ -142,17 +148,66 @@ class LocationService : Service() {
     private fun triggerAlarm(alarm: LocationAlarm) {
         showAlarmNotification(alarm)
 
-        if (alarm.soundEnabled) {
+        // Choisir entre alarme système ou alarme personnalisée
+        if (alarm.useSystemAlarm) {
+            triggerSystemAlarm(alarm)
+        } else {
+            // Méthode personnalisée
+            if (alarm.soundEnabled) {
+                playAlarmSound()
+            }
+
+            if (alarm.vibrationEnabled) {
+                startVibration()
+            }
+        }
+    }
+
+    /**
+     * Déclenche l'alarme par défaut du système Android
+     */
+    private fun triggerSystemAlarm(alarm: LocationAlarm) {
+        try {
+            val alarmIntent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
+                putExtra(AlarmClock.EXTRA_MESSAGE, "Réveil géographique: ${alarm.name}")
+                putExtra(AlarmClock.EXTRA_HOUR, 0) // Heure immédiate
+                putExtra(AlarmClock.EXTRA_MINUTES, 0)
+                putExtra(AlarmClock.EXTRA_SKIP_UI, true) // Déclenche immédiatement
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+
+            // Vérifier si une app d'alarme est disponible
+            if (alarmIntent.resolveActivity(packageManager) != null) {
+                startActivity(alarmIntent)
+            } else {
+                // Fallback vers la méthode personnalisée
+                playAlarmSound()
+            }
+        } catch (e: Exception) {
+            // Fallback vers la méthode personnalisée en cas d'erreur
             playAlarmSound()
         }
+    }
 
-        if (alarm.vibrationEnabled) {
-            startVibration()
+    /**
+     * Alternative: Utiliser directement l'application d'alarme du système
+     */
+    private fun openSystemAlarmApp(alarm: LocationAlarm) {
+        try {
+            val alarmIntent = Intent(AlarmClock.ACTION_SHOW_ALARMS).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+
+            if (alarmIntent.resolveActivity(packageManager) != null) {
+                startActivity(alarmIntent)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
     private fun showAlarmNotification(alarm: LocationAlarm) {
-        val notificationManager = getSystemService(NotificationManager::class.java)
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         val intent = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(
@@ -208,6 +263,7 @@ class LocationService : Service() {
             } else {
                 @Suppress("DEPRECATION")
                 val pattern = longArrayOf(0, 500, 200, 500, 200, 500)
+                @Suppress("DEPRECATION")
                 it.vibrate(pattern, 0)
             }
 

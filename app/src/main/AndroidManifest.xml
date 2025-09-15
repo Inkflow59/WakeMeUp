@@ -14,6 +14,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
 
+    <!-- Permission pour utiliser l'alarme système -->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
     <!-- Permission pour les notifications (Android 13+) -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 

@@ -13,6 +13,7 @@ data class LocationAlarm(
     val isActive: Boolean = true,
     val soundEnabled: Boolean = true,
     val vibrationEnabled: Boolean = true,
+    val useSystemAlarm: Boolean = false, // Nouvelle option pour utiliser l'alarme système
     val createdAt: Long = System.currentTimeMillis()
 ) : Parcelable {
 

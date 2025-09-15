@@ -54,7 +54,7 @@ class LocationService : Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationManager = getSystemService(NotificationManager::class.java)
 
-            // Canal pour le service en arrière-plan
+            // Canal pour le service de localisation
             val serviceChannel = NotificationChannel(
                 CHANNEL_ID,
                 "Service de localisation",

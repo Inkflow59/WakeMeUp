@@ -259,13 +259,8 @@ class AlarmEditorActivity : AppCompatActivity() {
     }
 
     private fun saveAlarm() {
-        val name = binding.editTextAlarmName.text.toString().trim()
+        var name = binding.editTextAlarmName.text.toString().trim()
         var location = selectedLocation
-
-        if (name.isEmpty()) {
-            Toast.makeText(this, "Veuillez entrer un nom pour l'alarme", Toast.LENGTH_SHORT).show()
-            return
-        }
 
         // Si aucune position n'est sélectionnée, essayer de géocoder l'adresse saisie
         if (location == null) {
@@ -278,7 +273,7 @@ class AlarmEditorActivity : AppCompatActivity() {
                         val foundLocation = addresses[0]
                         location = GeoPoint(foundLocation.latitude, foundLocation.longitude)
                         selectedLocation = location
-                      }
+                    }
                 } catch (e: IOException) {
                     android.util.Log.e("AlarmEditorActivity", "Erreur de géocodage", e)
                 }
@@ -288,6 +283,23 @@ class AlarmEditorActivity : AppCompatActivity() {
         if (location == null) {
             Toast.makeText(this, "Veuillez sélectionner une position sur la carte ou entrer une adresse", Toast.LENGTH_SHORT).show()
             return
+        }
+
+        // Si aucun nom n'est saisi, utiliser l'adresse du point géographique
+        if (name.isEmpty()) {
+            try {
+                val geocoder = Geocoder(this, Locale.getDefault())
+                val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                if (!addresses.isNullOrEmpty()) {
+                    name = addresses[0].getAddressLine(0) ?: "Alarme sans nom"
+                } else {
+                    name = "Alarme ${String.format(Locale.getDefault(), "%.4f", location.latitude)}, ${String.format(Locale.getDefault(), "%.4f", location.longitude)}"
+                }
+            } catch (e: IOException) {
+                // Si le géocodage inverse échoue, utiliser les coordonnées
+                name = "Alarme ${String.format(Locale.getDefault(), "%.4f", location.latitude)}, ${String.format(Locale.getDefault(), "%.4f", location.longitude)}"
+                android.util.Log.e("AlarmEditorActivity", "Erreur de géocodage inverse", e)
+            }
         }
 
         try {

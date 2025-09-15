@@ -29,6 +29,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun refreshAlarms() {
+        loadAlarms()
+    }
+
     fun addAlarm(alarm: LocationAlarm) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {

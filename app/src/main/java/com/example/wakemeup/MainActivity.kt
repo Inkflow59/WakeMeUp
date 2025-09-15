@@ -43,6 +43,12 @@ class MainActivity : AppCompatActivity() {
         checkPermissions()
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Rafraîchir la liste des alarmes à chaque retour sur l'écran principal
+        viewModel.refreshAlarms()
+    }
+
     private fun setupRecyclerView() {
         alarmAdapter = AlarmAdapter(
             onToggleAlarm = { alarm -> viewModel.toggleAlarm(alarm) },

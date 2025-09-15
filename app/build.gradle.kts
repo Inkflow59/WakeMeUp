@@ -53,7 +53,9 @@ dependencies {
     implementation("org.osmdroid:osmdroid-android:6.1.17")
 
     // Interface utilisateur
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.cardview)
+    implementation(libs.androidx.recyclerview)
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.activity:activity-ktx:1.8.2")

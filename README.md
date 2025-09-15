@@ -4,7 +4,7 @@
 
 ![Android](https://img.shields.io/badge/Android-21%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.10-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
-![Google Maps](https://img.shields.io/badge/Google%20Maps-API-4285F4?style=for-the-badge&logo=googlemaps&logoColor=white)
+![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-Free-7EBC6F?style=for-the-badge&logo=openstreetmap&logoColor=white)
 ![GPS](https://img.shields.io/badge/GPS-Location-FF6B35?style=for-the-badge&logo=location&logoColor=white)
 
 *Ne ratez plus jamais votre arrêt ! Réveillez-vous automatiquement quand vous approchez de votre destination.*
@@ -23,7 +23,7 @@
 ## ✨ Fonctionnalités
 
 ### 🎛️ Gestion des Alarmes
-- **Création intuitive** : Interface simple avec carte interactive
+- **Création intuitive** : Interface simple avec carte interactive OpenStreetMap
 - **Personnalisation complète** : Nom, position, rayon d'activation (10m - 1km)
 - **Options flexibles** : Son, vibration, activation/désactivation
 - **Recherche d'adresse** : Trouvez facilement vos destinations
@@ -32,7 +32,7 @@
 - **Surveillance continue** : Service en arrière-plan optimisé
 - **Précision GPS** : Utilise la géolocalisation fine
 - **Économie d'énergie** : Gestion intelligente de la batterie
-- **Fonctionnement offline** : Pas besoin d'internet une fois configuré
+- **Fonctionnement offline** : Pas besoin d'internet une fois les cartes téléchargées
 
 ### 🔔 Système d'Alerte
 - **Notifications push** : Alertes immédiates et visibles
@@ -44,7 +44,7 @@
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   📋 Liste      │    │   🗺️ Carte      │    │   ⚙️ Config     │
+│   📋 Liste      │    │   🗺️ Carte OSM  │    │   ⚙️ Config     │
 │   des Alarmes   │    │   Interactive   │    │   Alarme        │
 │                 │    │                 │    │                 │
 │ • Maison        │    │    📍 Marker    │    │ Nom: Bureau     │
@@ -60,7 +60,7 @@
 
 ### Prérequis
 - **Android 5.0** (API 21) ou supérieur
-- **Services Google Play** installés
+- **Connexion internet** (pour télécharger les cartes)
 - **GPS** activé sur l'appareil
 
 ### Étapes d'installation
@@ -75,18 +75,13 @@
    - Ouvrir Android Studio
    - File → Open → Sélectionner le dossier du projet
 
-3. **Configuration Google Maps**
-   - Obtenir une clé API Google Maps depuis [Google Cloud Console](https://console.cloud.google.com/)
-   - Ajouter la clé dans `local.properties` :
-     ```properties
-     MAPS_API_KEY=votre_cle_api_ici
-     ```
-
-4. **Compiler et installer**
+3. **Compiler et installer**
    ```bash
    ./gradlew assembleDebug
    ./gradlew installDebug
    ```
+
+**🎉 Aucune configuration supplémentaire nécessaire !** L'application utilise OpenStreetMap qui ne nécessite pas de clé API.
 
 ## 🔧 Configuration
 
@@ -103,6 +98,11 @@ L'application demande automatiquement les permissions suivantes :
 <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 <uses-permission android:name="android.permission.VIBRATE" />
+
+<!-- OpenStreetMap -->
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
 ### Optimisation de la batterie

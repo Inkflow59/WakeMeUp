@@ -4,6 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -17,22 +21,39 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun loadAlarms() {
-        _alarms.value = alarmRepository.getAllAlarms()
+        viewModelScope.launch {
+            val alarmsList = withContext(Dispatchers.IO) {
+                alarmRepository.getAllAlarms()
+            }
+            _alarms.value = alarmsList
+        }
     }
 
     fun addAlarm(alarm: LocationAlarm) {
-        alarmRepository.saveAlarm(alarm)
-        loadAlarms()
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                alarmRepository.saveAlarm(alarm)
+            }
+            loadAlarms()
+        }
     }
 
     fun updateAlarm(alarm: LocationAlarm) {
-        alarmRepository.saveAlarm(alarm)
-        loadAlarms()
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                alarmRepository.saveAlarm(alarm)
+            }
+            loadAlarms()
+        }
     }
 
     fun deleteAlarm(alarm: LocationAlarm) {
-        alarmRepository.deleteAlarm(alarm.id)
-        loadAlarms()
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                alarmRepository.deleteAlarm(alarm.id)
+            }
+            loadAlarms()
+        }
     }
 
     fun toggleAlarm(alarm: LocationAlarm) {

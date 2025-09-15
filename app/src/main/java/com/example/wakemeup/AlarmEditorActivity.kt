@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -11,25 +12,26 @@ import androidx.core.content.ContextCompat
 import com.example.wakemeup.databinding.ActivityAlarmEditorBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.Circle
-import com.google.android.gms.maps.model.CircleOptions
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import org.osmdroid.api.IMapController
+import org.osmdroid.config.Configuration
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Polygon
 import java.io.IOException
 import java.util.*
 
-class AlarmEditorActivity : AppCompatActivity(), OnMapReadyCallback {
+class AlarmEditorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAlarmEditorBinding
     private lateinit var alarmRepository: AlarmRepository
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var googleMap: GoogleMap? = null
-    private var selectedLocation: LatLng? = null
-    private var radiusCircle: Circle? = null
+    private lateinit var mapView: MapView
+    private lateinit var mapController: IMapController
+    private var selectedLocation: GeoPoint? = null
+    private var locationMarker: Marker? = null
+    private var radiusCircle: Polygon? = null
     private var editingAlarm: LocationAlarm? = null
 
     private val requestLocationPermission = registerForActivityResult(
@@ -42,6 +44,10 @@ class AlarmEditorActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Configuration osmdroid
+        Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
+
         binding = ActivityAlarmEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -62,7 +68,7 @@ class AlarmEditorActivity : AppCompatActivity(), OnMapReadyCallback {
             binding.seekBarRadius.progress = alarm.radius.toInt()
             binding.switchSound.isChecked = alarm.soundEnabled
             binding.switchVibration.isChecked = alarm.vibrationEnabled
-            selectedLocation = LatLng(alarm.latitude, alarm.longitude)
+            selectedLocation = GeoPoint(alarm.latitude, alarm.longitude)
         }
 
         // Configuration du slider de rayon
@@ -90,41 +96,50 @@ class AlarmEditorActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupMap() {
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-    }
+        try {
+            mapView = binding.mapView
 
-    override fun onMapReady(map: GoogleMap) {
-        googleMap = map
+            // Configuration de la carte
+            mapView.setTileSource(TileSourceFactory.MAPNIK)
+            mapView.setMultiTouchControls(true)
+            mapView.setBuiltInZoomControls(true)
 
-        // Configuration de la carte
-        map.uiSettings.isZoomControlsEnabled = true
-        map.uiSettings.isMyLocationButtonEnabled = false
+            mapController = mapView.controller
+            mapController.setZoom(15.0)
 
-        // Clic sur la carte pour sélectionner une position
-        map.setOnMapClickListener { latLng ->
-            selectedLocation = latLng
-            updateMapMarker()
-            updateAddressFromLocation(latLng)
+            // Position initiale
+            selectedLocation?.let { location ->
+                mapController.setCenter(location)
+                updateMapMarker()
+            } ?: run {
+                // Position par défaut (Paris)
+                val defaultLocation = GeoPoint(48.8566, 2.3522)
+                mapController.setCenter(defaultLocation)
+            }
+
+            // Gestion des clics sur la carte
+            mapView.setOnTouchListener { _, event ->
+                if (event.action == android.view.MotionEvent.ACTION_UP) {
+                    val projection = mapView.projection
+                    val geoPoint = projection.fromPixels(event.x.toInt(), event.y.toInt()) as GeoPoint
+                    selectedLocation = geoPoint
+                    updateMapMarker()
+                    updateAddressFromLocation(geoPoint)
+                }
+                false
+            }
+
+            enableMyLocation()
+        } catch (e: Exception) {
+            android.util.Log.e("AlarmEditorActivity", "Erreur lors de l'initialisation de la carte", e)
+            Toast.makeText(this, "Erreur lors du chargement de la carte OpenStreetMap", Toast.LENGTH_LONG).show()
         }
-
-        // Afficher la position initiale
-        selectedLocation?.let { location ->
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
-            updateMapMarker()
-        } ?: run {
-            // Position par défaut (Paris)
-            val defaultLocation = LatLng(48.8566, 2.3522)
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 10f))
-        }
-
-        enableMyLocation()
     }
 
     private fun enableMyLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
-            googleMap?.isMyLocationEnabled = true
+            // OSMDroid n'a pas de bouton "ma position" intégré, on peut l'ajouter manuellement si nécessaire
         } else {
             requestLocationPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
@@ -136,11 +151,12 @@ class AlarmEditorActivity : AppCompatActivity(), OnMapReadyCallback {
 
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 location?.let {
-                    val latLng = LatLng(it.latitude, it.longitude)
-                    selectedLocation = latLng
-                    googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                    val geoPoint = GeoPoint(it.latitude, it.longitude)
+                    selectedLocation = geoPoint
+                    mapController.animateTo(geoPoint)
+                    mapController.setZoom(15.0)
                     updateMapMarker()
-                    updateAddressFromLocation(latLng)
+                    updateAddressFromLocation(geoPoint)
                 }
             }
         }
@@ -159,9 +175,10 @@ class AlarmEditorActivity : AppCompatActivity(), OnMapReadyCallback {
 
             if (!addresses.isNullOrEmpty()) {
                 val location = addresses[0]
-                val latLng = LatLng(location.latitude, location.longitude)
-                selectedLocation = latLng
-                googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                val geoPoint = GeoPoint(location.latitude, location.longitude)
+                selectedLocation = geoPoint
+                mapController.animateTo(geoPoint)
+                mapController.setZoom(15.0)
                 updateMapMarker()
             } else {
                 Toast.makeText(this, "Adresse non trouvée", Toast.LENGTH_SHORT).show()
@@ -171,10 +188,10 @@ class AlarmEditorActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun updateAddressFromLocation(latLng: LatLng) {
+    private fun updateAddressFromLocation(geoPoint: GeoPoint) {
         try {
             val geocoder = Geocoder(this, Locale.getDefault())
-            val addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+            val addresses = geocoder.getFromLocation(geoPoint.latitude, geoPoint.longitude, 1)
 
             if (!addresses.isNullOrEmpty()) {
                 val address = addresses[0].getAddressLine(0)
@@ -187,29 +204,52 @@ class AlarmEditorActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun updateMapMarker() {
         selectedLocation?.let { location ->
-            googleMap?.clear()
-            googleMap?.addMarker(
-                MarkerOptions()
-                    .position(location)
-                    .title("Position de l'alarme")
-            )
+            // Supprimer l'ancien marqueur
+            locationMarker?.let { marker ->
+                mapView.overlays.remove(marker)
+            }
+
+            // Créer un nouveau marqueur
+            locationMarker = Marker(mapView).apply {
+                position = location
+                title = "Position de l'alarme"
+                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            }
+
+            mapView.overlays.add(locationMarker)
             updateRadiusCircle()
+            mapView.invalidate()
         }
     }
 
     private fun updateRadiusCircle() {
         selectedLocation?.let { location ->
-            radiusCircle?.remove()
+            // Supprimer l'ancien cercle
+            radiusCircle?.let { circle ->
+                mapView.overlays.remove(circle)
+            }
 
-            val radius = binding.seekBarRadius.progress.toDouble()
-            radiusCircle = googleMap?.addCircle(
-                CircleOptions()
-                    .center(location)
-                    .radius(radius)
-                    .strokeColor(0xFF0000FF.toInt())
-                    .fillColor(0x220000FF)
-                    .strokeWidth(2f)
-            )
+            // Créer un nouveau cercle de rayon
+            val radiusInMeters = binding.seekBarRadius.progress.toDouble()
+            radiusCircle = Polygon().apply {
+                val points = arrayListOf<GeoPoint>()
+
+                // Créer un cercle approximatif avec des points
+                for (i in 0..360 step 10) {
+                    val angle = Math.toRadians(i.toDouble())
+                    val lat = location.latitude + (radiusInMeters / 111320.0) * Math.cos(angle)
+                    val lng = location.longitude + (radiusInMeters / (111320.0 * Math.cos(Math.toRadians(location.latitude)))) * Math.sin(angle)
+                    points.add(GeoPoint(lat, lng))
+                }
+
+                setPoints(points)
+                fillColor = 0x220000FF
+                strokeColor = 0xFF0000FF.toInt()
+                strokeWidth = 2f
+            }
+
+            mapView.overlays.add(radiusCircle)
+            mapView.invalidate()
         }
     }
 
@@ -220,31 +260,64 @@ class AlarmEditorActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun saveAlarm() {
         val name = binding.editTextAlarmName.text.toString().trim()
-        val location = selectedLocation
+        var location = selectedLocation
 
         if (name.isEmpty()) {
             Toast.makeText(this, "Veuillez entrer un nom pour l'alarme", Toast.LENGTH_SHORT).show()
             return
         }
 
+        // Si aucune position n'est sélectionnée, essayer de géocoder l'adresse saisie
         if (location == null) {
-            Toast.makeText(this, "Veuillez sélectionner une position sur la carte", Toast.LENGTH_SHORT).show()
+            val address = binding.editTextAddress.text.toString().trim()
+            if (address.isNotEmpty()) {
+                try {
+                    val geocoder = Geocoder(this, Locale.getDefault())
+                    val addresses = geocoder.getFromLocationName(address, 1)
+                    if (!addresses.isNullOrEmpty()) {
+                        val foundLocation = addresses[0]
+                        location = GeoPoint(foundLocation.latitude, foundLocation.longitude)
+                        selectedLocation = location
+                      }
+                } catch (e: IOException) {
+                    android.util.Log.e("AlarmEditorActivity", "Erreur de géocodage", e)
+                }
+            }
+        }
+
+        if (location == null) {
+            Toast.makeText(this, "Veuillez sélectionner une position sur la carte ou entrer une adresse", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val alarm = LocationAlarm(
-            id = editingAlarm?.id ?: System.currentTimeMillis().toString(),
-            name = name,
-            latitude = location.latitude,
-            longitude = location.longitude,
-            radius = binding.seekBarRadius.progress.toFloat(),
-            isActive = true,
-            soundEnabled = binding.switchSound.isChecked,
-            vibrationEnabled = binding.switchVibration.isChecked
-        )
+        try {
+            val alarm = LocationAlarm(
+                id = editingAlarm?.id ?: System.currentTimeMillis().toString(),
+                name = name,
+                latitude = location.latitude,
+                longitude = location.longitude,
+                radius = binding.seekBarRadius.progress.toFloat(),
+                isActive = true,
+                soundEnabled = binding.switchSound.isChecked,
+                vibrationEnabled = binding.switchVibration.isChecked
+            )
 
-        alarmRepository.saveAlarm(alarm)
-        Toast.makeText(this, "Alarme sauvegardée", Toast.LENGTH_SHORT).show()
-        finish()
+            alarmRepository.saveAlarm(alarm)
+            Toast.makeText(this, "Alarme sauvegardée", Toast.LENGTH_SHORT).show()
+            finish()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Erreur lors de la sauvegarde: ${e.message}", Toast.LENGTH_LONG).show()
+            android.util.Log.e("AlarmEditorActivity", "Erreur lors de la sauvegarde", e)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
     }
 }

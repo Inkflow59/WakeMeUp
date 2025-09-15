@@ -3,6 +3,7 @@ package com.example.wakemeup
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 
 class BootReceiver : BroadcastReceiver() {
 
@@ -15,7 +16,11 @@ class BootReceiver : BroadcastReceiver() {
             // Ne démarrer le service que s'il y a des alarmes actives
             if (activeAlarms.isNotEmpty()) {
                 val serviceIntent = Intent(context, LocationService::class.java)
-                context.startForegroundService(serviceIntent)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    context.startForegroundService(serviceIntent)
+                } else {
+                    context.startService(serviceIntent)
+                }
             }
         }
     }

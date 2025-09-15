@@ -46,9 +46,11 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    // Géolocalisation et services Google Play
+    // Géolocalisation (on garde seulement location, pas maps)
     implementation("com.google.android.gms:play-services-location:21.0.1")
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    // OpenStreetMap au lieu de Google Maps
+    implementation("org.osmdroid:osmdroid-android:6.1.17")
 
     // Interface utilisateur
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -59,6 +61,9 @@ dependencies {
 
     // Services et notifications
     implementation("androidx.work:work-runtime-ktx:2.9.0")
+
+    // Ajout de Gson pour la sérialisation JSON
+    implementation("com.google.code.gson:gson:2.10.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

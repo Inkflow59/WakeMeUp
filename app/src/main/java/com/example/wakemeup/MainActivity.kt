@@ -108,7 +108,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeLocationService() {
         val serviceIntent = Intent(this, LocationService::class.java)
-        startForegroundService(serviceIntent)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent)
+        } else {
+            startService(serviceIntent)
+        }
     }
 
     private fun openAlarmEditor(alarm: LocationAlarm?) {

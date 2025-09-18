@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         setupObservers()
         setupButtons()
+        setupStopAlarmButton()
 
         checkAndRequestPermissions()
     }
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                 permissionManager.showPermissionSettingsDialog()
             }
         }
+        updateStopAlarmButtonVisibility()
     }
 
     private fun setupRecyclerView() {
@@ -96,6 +98,19 @@ class MainActivity : AppCompatActivity() {
                 checkAndRequestPermissions()
             }
         }
+    }
+
+    private fun setupStopAlarmButton() {
+        binding.stopAlarmButton.setOnClickListener {
+            stopActiveAlarm()
+        }
+        updateStopAlarmButtonVisibility()
+    }
+
+    private fun updateStopAlarmButtonVisibility() {
+        val prefs = getSharedPreferences("alarm_prefs", MODE_PRIVATE)
+        val alarmActive = prefs.getBoolean("alarm_active", false)
+        binding.stopAlarmButton.visibility = if (alarmActive) android.view.View.VISIBLE else android.view.View.GONE
     }
 
     private fun checkAndRequestPermissions() {
@@ -165,5 +180,18 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, AlarmEditorActivity::class.java)
         alarm?.let { intent.putExtra("alarm", it) }
         startActivity(intent)
+    }
+
+    private fun stopActiveAlarm() {
+        val intent = Intent(this, LocationService::class.java).apply {
+            action = "STOP_ALARM"
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            startForegroundService(intent)
+        } else {
+            startService(intent)
+        }
+        // Masquer le bouton immédiatement pour le retour visuel
+        binding.stopAlarmButton.visibility = android.view.View.GONE
     }
 }

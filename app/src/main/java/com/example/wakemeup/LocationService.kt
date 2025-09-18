@@ -54,6 +54,7 @@ class LocationService : Service() {
         if (intent?.action == "STOP_ALARM") {
             stopAlarmSound()
             vibrator?.cancel()
+            setAlarmActive(false)
             // Supprimer la notification d'alarme
             val alarmId = intent.getStringExtra("alarm_id")
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -154,8 +155,14 @@ class LocationService : Service() {
         }
     }
 
+    private fun setAlarmActive(active: Boolean) {
+        val prefs = getSharedPreferences("alarm_prefs", MODE_PRIVATE)
+        prefs.edit().putBoolean("alarm_active", active).apply()
+    }
+
     private fun triggerAlarm(alarm: LocationAlarm) {
         showAlarmNotification(alarm)
+        setAlarmActive(true)
 
         // Choisir entre alarme système ou alarme personnalisée
         if (alarm.useSystemAlarm) {
@@ -299,6 +306,7 @@ class LocationService : Service() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
         stopAlarmSound()
         vibrator?.cancel()
+        setAlarmActive(false)
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

@@ -51,6 +51,15 @@ class LocationService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if (intent?.action == "STOP_ALARM") {
+            stopAlarmSound()
+            vibrator?.cancel()
+            // Supprimer la notification d'alarme
+            val alarmId = intent.getStringExtra("alarm_id")
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            alarmId?.let { notificationManager.cancel(it.hashCode()) }
+            return START_STICKY
+        }
         startForeground(NOTIFICATION_ID, createServiceNotification())
         startLocationUpdates()
         return START_STICKY
@@ -215,6 +224,16 @@ class LocationService : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
+        // Intent pour arrêter l'alarme
+        val stopIntent = Intent(this, LocationService::class.java).apply {
+            action = "STOP_ALARM"
+            putExtra("alarm_id", alarm.id)
+        }
+        val stopPendingIntent = PendingIntent.getService(
+            this, alarm.id.hashCode(), stopIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
         val notification = NotificationCompat.Builder(this, ALARM_CHANNEL_ID)
             .setContentTitle("🚨 Réveil géographique!")
             .setContentText("Vous êtes arrivé près de: ${alarm.name}")
@@ -223,6 +242,7 @@ class LocationService : Service() {
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
+            .addAction(android.R.drawable.ic_lock_idle_alarm, "Arrêter", stopPendingIntent)
             .build()
 
         notificationManager.notify(alarm.id.hashCode(), notification)

@@ -67,7 +67,7 @@ class PermissionManager(private val activity: Activity) {
 
         if (missingPermissions.isEmpty()) return
 
-        val permissionNames = missingPermissions.map { permission ->
+        val permissionNames = missingPermissions.joinToString("\n") { permission ->
             when (permission) {
                 Manifest.permission.ACCESS_FINE_LOCATION -> "• Localisation précise"
                 Manifest.permission.ACCESS_COARSE_LOCATION -> "• Localisation approximative"
@@ -75,7 +75,7 @@ class PermissionManager(private val activity: Activity) {
                 Manifest.permission.POST_NOTIFICATIONS -> "• Notifications"
                 else -> "• $permission"
             }
-        }.joinToString("\n")
+        }
 
         AlertDialog.Builder(activity)
             .setTitle("Permissions requises")

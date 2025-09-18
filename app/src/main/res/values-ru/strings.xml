@@ -40,5 +40,19 @@
 
     <!-- Map -->
     <string name="alarm_position_marker">Позиция будильника</string>
-</resources>
 
+    <!-- Permission Messages -->
+    <string name="location_permission_required_for_alarm">Разрешения на определение местоположения необходимы для создания будильника</string>
+    <string name="location_permission_required_for_map">Разрешение на определение местоположения необходимо для использования карты</string>
+    <string name="location_permission_required">Разрешения на определение местоположения необходимы</string>
+    <string name="permissions_granted">Разрешения предоставлены! Приложение готово к использованию.</string>
+    <string name="some_permissions_required">Некоторые разрешения необходимы для правильной работы приложения</string>
+
+    <!-- Notifications -->
+    <string name="service_notification_title">WakeMeUp активен</string>
+    <string name="service_notification_text">Отслеживание вашего местоположения...</string>
+    <string name="alarm_notification_title">🚨 Географический будильник!</string>
+    <string name="alarm_notification_text">Вы прибыли рядом с: %1$s</string>
+    <string name="stop_alarm_action">Остановить</string>
+
+</resources>

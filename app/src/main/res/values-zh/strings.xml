@@ -40,5 +40,19 @@
 
     <!-- Map -->
     <string name="alarm_position_marker">闹钟位置</string>
-</resources>
 
+    <!-- Permission Messages -->
+    <string name="location_permission_required_for_alarm">创建闹钟需要位置权限</string>
+    <string name="location_permission_required_for_map">使用地图需要位置权限</string>
+    <string name="location_permission_required">需要位置权限</string>
+    <string name="permissions_granted">权限已授予！应用程序已准备就绪。</string>
+    <string name="some_permissions_required">应用程序正常运行需要一些权限</string>
+
+    <!-- Notifications -->
+    <string name="service_notification_title">WakeMeUp 活跃</string>
+    <string name="service_notification_text">正在监控您的位置...</string>
+    <string name="alarm_notification_title">🚨 地理闹钟！</string>
+    <string name="alarm_notification_text">您已到达附近：%1$s</string>
+    <string name="stop_alarm_action">停止</string>
+
+</resources>

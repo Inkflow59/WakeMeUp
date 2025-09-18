@@ -40,5 +40,19 @@
 
     <!-- Map -->
     <string name="alarm_position_marker">Posizione della sveglia</string>
-</resources>
 
+    <!-- Permission Messages -->
+    <string name="location_permission_required_for_alarm">Sono richiesti permessi di localizzazione per creare una sveglia</string>
+    <string name="location_permission_required_for_map">È richiesto il permesso di localizzazione per utilizzare la mappa</string>
+    <string name="location_permission_required">Sono richiesti permessi di localizzazione</string>
+    <string name="permissions_granted">Permessi concessi! L'applicazione è pronta per l'uso.</string>
+    <string name="some_permissions_required">Alcuni permessi sono necessari per il corretto funzionamento dell'applicazione</string>
+
+    <!-- Notifications -->
+    <string name="service_notification_title">WakeMeUp attivo</string>
+    <string name="service_notification_text">Monitoraggio della tua posizione...</string>
+    <string name="alarm_notification_title">🚨 Sveglia geografica!</string>
+    <string name="alarm_notification_text">Sei arrivato vicino a: %1$s</string>
+    <string name="stop_alarm_action">Ferma</string>
+
+</resources>

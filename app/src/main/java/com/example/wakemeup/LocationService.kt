@@ -242,14 +242,14 @@ class LocationService : Service() {
         )
 
         val notification = NotificationCompat.Builder(this, ALARM_CHANNEL_ID)
-            .setContentTitle("🚨 Réveil géographique!")
-            .setContentText("Vous êtes arrivé près de: ${alarm.name}")
+            .setContentTitle(getString(R.string.alarm_notification_title))
+            .setContentText(getString(R.string.alarm_notification_text, alarm.name))
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
-            .addAction(android.R.drawable.ic_lock_idle_alarm, "Arrêter", stopPendingIntent)
+            .addAction(android.R.drawable.ic_lock_idle_alarm, getString(R.string.stop_alarm_action), stopPendingIntent)
             .build()
 
         notificationManager.notify(alarm.id.hashCode(), notification)

@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity() {
 
         if (allGranted) {
             initializeLocationService()
-            Toast.makeText(this, "Permissions accordées ! L'application est prête à être utilisée.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.permissions_granted), Toast.LENGTH_SHORT).show()
         } else {
             val deniedPermissions = permissions.filter { !it.value }.keys.toList()
 
@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
                 permissionManager.showPermissionSettingsDialog()
             } else {
                 // L'utilisateur a refusé mais peut encore accorder les permissions
-                Toast.makeText(this, "Certaines permissions sont nécessaires pour le bon fonctionnement de l'application", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.some_permissions_required), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun openAlarmEditor(alarm: LocationAlarm?) {
         if (!permissionManager.areAllPermissionsGranted()) {
-            Toast.makeText(this, "Les permissions de localisation sont requises", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.location_permission_required), Toast.LENGTH_SHORT).show()
             checkAndRequestPermissions()
             return
         }

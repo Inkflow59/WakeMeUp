@@ -39,4 +39,19 @@
 
     <!-- Map -->
     <string name="alarm_position_marker">Position de l\'alarme</string>
+
+    <!-- Permission Messages -->
+    <string name="location_permission_required_for_alarm">Les permissions de localisation sont requises pour créer une alarme</string>
+    <string name="location_permission_required_for_map">La permission de localisation est nécessaire pour utiliser la carte</string>
+    <string name="location_permission_required">Les permissions de localisation sont requises</string>
+    <string name="permissions_granted">Permissions accordées ! L\'application est prête à être utilisée.</string>
+    <string name="some_permissions_required">Certaines permissions sont nécessaires pour le bon fonctionnement de l\'application</string>
+
+    <!-- Notifications -->
+    <string name="service_notification_title">WakeMeUp actif</string>
+    <string name="service_notification_text">Surveillance de votre position en cours...</string>
+    <string name="alarm_notification_title">🚨 Réveil géographique!</string>
+    <string name="alarm_notification_text">Vous êtes arrivé près de: %1$s</string>
+    <string name="stop_alarm_action">Arrêter</string>
+
 </resources>

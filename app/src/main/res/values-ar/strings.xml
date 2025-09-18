@@ -40,5 +40,19 @@
 
     <!-- Map -->
     <string name="alarm_position_marker">موقع المنبه</string>
-</resources>
 
+    <!-- Permission Messages -->
+    <string name="location_permission_required_for_alarm">أذونات الموقع مطلوبة لإنشاء منبه</string>
+    <string name="location_permission_required_for_map">إذن الموقع مطلوب لاستخدام الخريطة</string>
+    <string name="location_permission_required">أذونات الموقع مطلوبة</string>
+    <string name="permissions_granted">تم منح الأذونات! التطبيق جاهز للاستخدام.</string>
+    <string name="some_permissions_required">بعض الأذونات مطلوبة للتشغيل السليم للتطبيق</string>
+
+    <!-- Notifications -->
+    <string name="service_notification_title">WakeMeUp نشط</string>
+    <string name="service_notification_text">مراقبة موقعك...</string>
+    <string name="alarm_notification_title">🚨 منبه جغرافي!</string>
+    <string name="alarm_notification_text">لقد وصلت بالقرب من: %1$s</string>
+    <string name="stop_alarm_action">إيقاف</string>
+
+</resources>

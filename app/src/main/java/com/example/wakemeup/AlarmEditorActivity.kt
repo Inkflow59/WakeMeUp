@@ -83,7 +83,7 @@ class AlarmEditorActivity : AppCompatActivity() {
 
         // Vérifier les permissions au retour depuis les paramètres
         if (!permissionManager.areAllPermissionsGranted()) {
-            Toast.makeText(this, "Les permissions de localisation sont requises", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.location_permission_required), Toast.LENGTH_SHORT).show()
             finish()
         }
     }

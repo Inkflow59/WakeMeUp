@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wakemeup.databinding.ItemAlarmBinding
+import java.util.Locale
 
 class AlarmAdapter(
     private val onToggleAlarm: (LocationAlarm) -> Unit,
@@ -27,19 +28,19 @@ class AlarmAdapter(
         fun bind(alarm: LocationAlarm) {
             binding.apply {
                 textViewAlarmName.text = alarm.name
-                textViewLocation.text = "Lat: ${String.format("%.4f", alarm.latitude)}, Lng: ${String.format("%.4f", alarm.longitude)}"
-                textViewRadius.text = "Rayon: ${alarm.radius.toInt()}m"
+                textViewAlarmLocation.text = "Lat: ${String.format(Locale.getDefault(), "%.4f", alarm.latitude)}, Lng: ${String.format(Locale.getDefault(), "%.4f", alarm.longitude)}"
+                textViewAlarmRadius.text = "Rayon: ${alarm.radius.toInt()}m"
 
-                switchActive.isChecked = alarm.isActive
-                switchActive.setOnCheckedChangeListener { _, _ ->
+                switchAlarmEnabled.isChecked = alarm.isActive
+                switchAlarmEnabled.setOnCheckedChangeListener { _, _ ->
                     onToggleAlarm(alarm)
                 }
 
-                buttonEdit.setOnClickListener {
+                buttonEditAlarm.setOnClickListener {
                     onEditAlarm(alarm)
                 }
 
-                buttonDelete.setOnClickListener {
+                buttonDeleteAlarm.setOnClickListener {
                     onDeleteAlarm(alarm)
                 }
 

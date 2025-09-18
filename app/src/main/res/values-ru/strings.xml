@@ -1,31 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Name -->
     <string name="app_name">Wake Me Up</string>
 
     <!-- Main Activity -->
     <string name="main_title">Мои GPS-будильники</string>
-    <string name="no_alarms_message">Нет настроенных будильников.\nНажмите +, чтобы создать один.</string>
+    <string name="no_alarms_message">Будильники не настроены.\nНажмите +, чтобы создать.</string>
     <string name="add_alarm_description">Добавить будильник</string>
 
     <!-- Alarm Editor Activity -->
+    <string name="create_alarm_title">Создать будильник</string>
+    <string name="edit_alarm_title">Редактировать будильник</string>
     <string name="alarm_name_hint">Название будильника</string>
+    <string name="location_label">Местоположение</string>
+    <string name="address_hint">Введите адрес</string>
+    <string name="search">Поиск</string>
+    <string name="current_location">Использовать моё местоположение</string>
+    <string name="select_location">Выбрать местоположение</string>
+    <string name="no_location_selected">Местоположение не выбрано</string>
+    <string name="radius_label">Радиус активации</string>
+    <string name="options_label">Параметры</string>
+    <string name="sound_enabled">Звук включён</string>
+    <string name="vibration_enabled">Вибрация включена</string>
+    <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
     <string name="search_address_hint">Поиск адреса</string>
     <string name="search_button">Поиск</string>
-    <string name="use_current_location">📍 Использовать мое текущее местоположение</string>
+    <string name="use_current_location">📍 Использовать моё текущее местоположение</string>
     <string name="activation_radius_label">Радиус активации</string>
     <string name="radius_format">Радиус: %1$dм</string>
-    <string name="alarm_options_label">Настройки будильника</string>
+    <string name="alarm_options_label">Параметры будильника</string>
     <string name="sound_option">🔊 Звук</string>
     <string name="vibration_option">📳 Вибрация</string>
     <string name="cancel_button">Отмена</string>
     <string name="save_button">Сохранить</string>
     <string name="new_alarm_title">Новый будильник</string>
-    <string name="edit_alarm_title">Редактировать будильник</string>
 
     <!-- Alarm Item -->
+    <string name="edit_alarm">Редактировать будильник</string>
+    <string name="delete_alarm">Удалить будильник</string>
     <string name="alarm_name_default">Название будильника</string>
-    <string name="gps_position">GPS позиция</string>
+    <string name="gps_position">GPS-позиция</string>
 
     <!-- Toast Messages -->
     <string name="enter_address_message">Пожалуйста, введите адрес</string>
@@ -33,26 +47,27 @@
     <string name="address_search_error">Ошибка поиска адреса</string>
     <string name="map_loading_error">Ошибка загрузки OpenStreetMap</string>
     <string name="select_position_message">Пожалуйста, выберите позицию на карте или введите адрес</string>
-    <string name="alarm_saved">Будильник сохранен</string>
+    <string name="alarm_saved">Будильник сохранён</string>
     <string name="save_error">Ошибка сохранения: %1$s</string>
-    <string name="unnamed_alarm">Безымянный будильник</string>
+    <string name="unnamed_alarm">Будильник без названия</string>
     <string name="coordinates_alarm">Будильник %1$s, %2$s</string>
 
     <!-- Map -->
     <string name="alarm_position_marker">Позиция будильника</string>
 
     <!-- Permission Messages -->
-    <string name="location_permission_required_for_alarm">Разрешения на определение местоположения необходимы для создания будильника</string>
-    <string name="location_permission_required_for_map">Разрешение на определение местоположения необходимо для использования карты</string>
-    <string name="location_permission_required">Разрешения на определение местоположения необходимы</string>
+    <string name="location_permission_required_for_alarm">Разрешения на местоположение необходимы для создания будильника</string>
+    <string name="location_permission_required_for_map">Разрешение на местоположение необходимо для использования карты</string>
+    <string name="location_permission_required">Разрешения на местоположение необходимы</string>
     <string name="permissions_granted">Разрешения предоставлены! Приложение готово к использованию.</string>
     <string name="some_permissions_required">Некоторые разрешения необходимы для правильной работы приложения</string>
 
     <!-- Notifications -->
     <string name="service_notification_title">WakeMeUp активен</string>
-    <string name="service_notification_text">Отслеживание вашего местоположения...</string>
-    <string name="alarm_notification_title">🚨 Географический будильник!</string>
-    <string name="alarm_notification_text">Вы прибыли рядом с: %1$s</string>
-    <string name="stop_alarm_action">Остановить</string>
+    <string name="service_notification_content">Мониторинг будильников</string>
+    <string name="alarm_notification_title">Будильник WakeMeUp</string>
+    <string name="alarm_notification_content">Вы прибыли в пункт назначения!</string>
+    <string name="alarm_notification_text">Вы достигли места назначения</string>
+    <string name="stop_alarm_action">Остановить будильник</string>
 
 </resources>

@@ -1,15 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Name -->
     <string name="app_name">Wake Me Up</string>
 
     <!-- Main Activity -->
     <string name="main_title">我的GPS闹钟</string>
-    <string name="no_alarms_message">没有配置闹钟。\n点击+创建一个。</string>
+    <string name="no_alarms_message">未配置闹钟。\n点击 + 创建一个。</string>
     <string name="add_alarm_description">添加闹钟</string>
 
     <!-- Alarm Editor Activity -->
+    <string name="create_alarm_title">创建闹钟</string>
+    <string name="edit_alarm_title">编辑闹钟</string>
     <string name="alarm_name_hint">闹钟名称</string>
+    <string name="location_label">位置</string>
+    <string name="address_hint">输入地址</string>
+    <string name="search">搜索</string>
+    <string name="current_location">使用我的位置</string>
+    <string name="select_location">选择位置</string>
+    <string name="no_location_selected">未选择位置</string>
+    <string name="radius_label">激活半径</string>
+    <string name="options_label">选项</string>
+    <string name="sound_enabled">声音已启用</string>
+    <string name="vibration_enabled">振动已启用</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
     <string name="search_address_hint">搜索地址</string>
     <string name="search_button">搜索</string>
     <string name="use_current_location">📍 使用我的当前位置</string>
@@ -21,9 +34,10 @@
     <string name="cancel_button">取消</string>
     <string name="save_button">保存</string>
     <string name="new_alarm_title">新闹钟</string>
-    <string name="edit_alarm_title">编辑闹钟</string>
 
     <!-- Alarm Item -->
+    <string name="edit_alarm">编辑闹钟</string>
+    <string name="delete_alarm">删除闹钟</string>
     <string name="alarm_name_default">闹钟名称</string>
     <string name="gps_position">GPS位置</string>
 
@@ -46,13 +60,14 @@
     <string name="location_permission_required_for_map">使用地图需要位置权限</string>
     <string name="location_permission_required">需要位置权限</string>
     <string name="permissions_granted">权限已授予！应用程序已准备就绪。</string>
-    <string name="some_permissions_required">应用程序正常运行需要一些权限</string>
+    <string name="some_permissions_required">应用程序正常工作需要某些权限</string>
 
     <!-- Notifications -->
-    <string name="service_notification_title">WakeMeUp 活跃</string>
-    <string name="service_notification_text">正在监控您的位置...</string>
-    <string name="alarm_notification_title">🚨 地理闹钟！</string>
-    <string name="alarm_notification_text">您已到达附近：%1$s</string>
-    <string name="stop_alarm_action">停止</string>
+    <string name="service_notification_title">WakeMeUp已激活</string>
+    <string name="service_notification_content">正在监控闹钟</string>
+    <string name="alarm_notification_title">WakeMeUp闹钟</string>
+    <string name="alarm_notification_content">您已到达目的地！</string>
+    <string name="alarm_notification_text">您已到达目的地</string>
+    <string name="stop_alarm_action">停止闹钟</string>
 
 </resources>

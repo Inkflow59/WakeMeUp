@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Name -->
     <string name="app_name">Wake Me Up</string>
@@ -9,8 +8,22 @@
     <string name="add_alarm_description">Añadir alarma</string>
 
     <!-- Alarm Editor Activity -->
+    <string name="create_alarm_title">Crear alarma</string>
+    <string name="edit_alarm_title">Editar alarma</string>
     <string name="alarm_name_hint">Nombre de la alarma</string>
-    <string name="search_address_hint">Buscar una dirección</string>
+    <string name="location_label">Ubicación</string>
+    <string name="address_hint">Ingresar una dirección</string>
+    <string name="search">Buscar</string>
+    <string name="current_location">Usar mi ubicación</string>
+    <string name="select_location">Seleccionar ubicación</string>
+    <string name="no_location_selected">Ninguna ubicación seleccionada</string>
+    <string name="radius_label">Radio de activación</string>
+    <string name="options_label">Opciones</string>
+    <string name="sound_enabled">Sonido activado</string>
+    <string name="vibration_enabled">Vibración activada</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+    <string name="search_address_hint">Buscar dirección</string>
     <string name="search_button">Buscar</string>
     <string name="use_current_location">📍 Usar mi ubicación actual</string>
     <string name="activation_radius_label">Radio de activación</string>
@@ -21,18 +34,19 @@
     <string name="cancel_button">Cancelar</string>
     <string name="save_button">Guardar</string>
     <string name="new_alarm_title">Nueva alarma</string>
-    <string name="edit_alarm_title">Editar alarma</string>
 
     <!-- Alarm Item -->
+    <string name="edit_alarm">Editar alarma</string>
+    <string name="delete_alarm">Eliminar alarma</string>
     <string name="alarm_name_default">Nombre de la alarma</string>
     <string name="gps_position">Posición GPS</string>
 
     <!-- Toast Messages -->
-    <string name="enter_address_message">Por favor, introduce una dirección</string>
+    <string name="enter_address_message">Por favor ingrese una dirección</string>
     <string name="address_not_found">Dirección no encontrada</string>
-    <string name="address_search_error">Error al buscar la dirección</string>
+    <string name="address_search_error">Error al buscar dirección</string>
     <string name="map_loading_error">Error al cargar OpenStreetMap</string>
-    <string name="select_position_message">Por favor, selecciona una posición en el mapa o introduce una dirección</string>
+    <string name="select_position_message">Por favor seleccione una posición en el mapa o ingrese una dirección</string>
     <string name="alarm_saved">Alarma guardada</string>
     <string name="save_error">Error al guardar: %1$s</string>
     <string name="unnamed_alarm">Alarma sin nombre</string>
@@ -46,13 +60,14 @@
     <string name="location_permission_required_for_map">Se requiere permiso de ubicación para usar el mapa</string>
     <string name="location_permission_required">Se requieren permisos de ubicación</string>
     <string name="permissions_granted">¡Permisos concedidos! La aplicación está lista para usar.</string>
-    <string name="some_permissions_required">Algunos permisos son necesarios para el funcionamiento correcto de la aplicación</string>
+    <string name="some_permissions_required">Algunos permisos son necesarios para el correcto funcionamiento de la aplicación</string>
 
     <!-- Notifications -->
     <string name="service_notification_title">WakeMeUp activo</string>
-    <string name="service_notification_text">Monitoreando tu ubicación...</string>
-    <string name="alarm_notification_title">🚨 ¡Alarma geográfica!</string>
-    <string name="alarm_notification_text">Has llegado cerca de: %1$s</string>
-    <string name="stop_alarm_action">Parar</string>
+    <string name="service_notification_content">Monitoreando alarmas</string>
+    <string name="alarm_notification_title">Alarma WakeMeUp</string>
+    <string name="alarm_notification_content">¡Has llegado a tu destino!</string>
+    <string name="alarm_notification_text">Has alcanzado tu destino</string>
+    <string name="stop_alarm_action">Detener alarma</string>
 
 </resources>

@@ -1,30 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Name -->
     <string name="app_name">Wake Me Up</string>
 
     <!-- Main Activity -->
-    <string name="main_title">Le Mie Sveglie GPS</string>
-    <string name="no_alarms_message">Nessuna sveglia configurata.\nTocca + per crearne una.</string>
-    <string name="add_alarm_description">Aggiungi sveglia</string>
+    <string name="main_title">I Miei Allarmi GPS</string>
+    <string name="no_alarms_message">Nessun allarme configurato.\nTocca + per crearne uno.</string>
+    <string name="add_alarm_description">Aggiungi allarme</string>
 
     <!-- Alarm Editor Activity -->
-    <string name="alarm_name_hint">Nome della sveglia</string>
-    <string name="search_address_hint">Cerca un indirizzo</string>
+    <string name="create_alarm_title">Crea allarme</string>
+    <string name="edit_alarm_title">Modifica allarme</string>
+    <string name="alarm_name_hint">Nome allarme</string>
+    <string name="location_label">Posizione</string>
+    <string name="address_hint">Inserisci un indirizzo</string>
+    <string name="search">Cerca</string>
+    <string name="current_location">Usa la mia posizione</string>
+    <string name="select_location">Seleziona posizione</string>
+    <string name="no_location_selected">Nessuna posizione selezionata</string>
+    <string name="radius_label">Raggio di attivazione</string>
+    <string name="options_label">Opzioni</string>
+    <string name="sound_enabled">Suono attivato</string>
+    <string name="vibration_enabled">Vibrazione attivata</string>
+    <string name="cancel">Annulla</string>
+    <string name="save">Salva</string>
+    <string name="search_address_hint">Cerca indirizzo</string>
     <string name="search_button">Cerca</string>
     <string name="use_current_location">📍 Usa la mia posizione attuale</string>
     <string name="activation_radius_label">Raggio di attivazione</string>
     <string name="radius_format">Raggio: %1$dm</string>
-    <string name="alarm_options_label">Opzioni sveglia</string>
+    <string name="alarm_options_label">Opzioni allarme</string>
     <string name="sound_option">🔊 Suono</string>
     <string name="vibration_option">📳 Vibrazione</string>
     <string name="cancel_button">Annulla</string>
     <string name="save_button">Salva</string>
-    <string name="new_alarm_title">Nuova sveglia</string>
-    <string name="edit_alarm_title">Modifica sveglia</string>
+    <string name="new_alarm_title">Nuovo allarme</string>
 
     <!-- Alarm Item -->
-    <string name="alarm_name_default">Nome della sveglia</string>
+    <string name="edit_alarm">Modifica allarme</string>
+    <string name="delete_alarm">Elimina allarme</string>
+    <string name="alarm_name_default">Nome allarme</string>
     <string name="gps_position">Posizione GPS</string>
 
     <!-- Toast Messages -->
@@ -33,26 +47,27 @@
     <string name="address_search_error">Errore nella ricerca dell\'indirizzo</string>
     <string name="map_loading_error">Errore nel caricamento di OpenStreetMap</string>
     <string name="select_position_message">Seleziona una posizione sulla mappa o inserisci un indirizzo</string>
-    <string name="alarm_saved">Sveglia salvata</string>
+    <string name="alarm_saved">Allarme salvato</string>
     <string name="save_error">Errore di salvataggio: %1$s</string>
-    <string name="unnamed_alarm">Sveglia senza nome</string>
-    <string name="coordinates_alarm">Sveglia %1$s, %2$s</string>
+    <string name="unnamed_alarm">Allarme senza nome</string>
+    <string name="coordinates_alarm">Allarme %1$s, %2$s</string>
 
     <!-- Map -->
-    <string name="alarm_position_marker">Posizione della sveglia</string>
+    <string name="alarm_position_marker">Posizione allarme</string>
 
     <!-- Permission Messages -->
-    <string name="location_permission_required_for_alarm">Sono richiesti permessi di localizzazione per creare una sveglia</string>
-    <string name="location_permission_required_for_map">È richiesto il permesso di localizzazione per utilizzare la mappa</string>
-    <string name="location_permission_required">Sono richiesti permessi di localizzazione</string>
-    <string name="permissions_granted">Permessi concessi! L'applicazione è pronta per l'uso.</string>
-    <string name="some_permissions_required">Alcuni permessi sono necessari per il corretto funzionamento dell'applicazione</string>
+    <string name="location_permission_required_for_alarm">I permessi di localizzazione sono necessari per creare un allarme</string>
+    <string name="location_permission_required_for_map">Il permesso di localizzazione è necessario per usare la mappa</string>
+    <string name="location_permission_required">I permessi di localizzazione sono necessari</string>
+    <string name="permissions_granted">Permessi concessi! L\'app è pronta per l\'uso.</string>
+    <string name="some_permissions_required">Alcuni permessi sono necessari per il corretto funzionamento dell\'app</string>
 
     <!-- Notifications -->
     <string name="service_notification_title">WakeMeUp attivo</string>
-    <string name="service_notification_text">Monitoraggio della tua posizione...</string>
-    <string name="alarm_notification_title">🚨 Sveglia geografica!</string>
-    <string name="alarm_notification_text">Sei arrivato vicino a: %1$s</string>
-    <string name="stop_alarm_action">Ferma</string>
+    <string name="service_notification_content">Monitoraggio allarmi in corso</string>
+    <string name="alarm_notification_title">Allarme WakeMeUp</string>
+    <string name="alarm_notification_content">Sei arrivato a destinazione!</string>
+    <string name="alarm_notification_text">Hai raggiunto la tua destinazione</string>
+    <string name="stop_alarm_action">Ferma allarme</string>
 
 </resources>

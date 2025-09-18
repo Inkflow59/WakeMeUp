@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Name -->
     <string name="app_name">Wake Me Up</string>
@@ -9,8 +8,22 @@
     <string name="add_alarm_description">Add alarm</string>
 
     <!-- Alarm Editor Activity -->
+    <string name="create_alarm_title">Create alarm</string>
+    <string name="edit_alarm_title">Edit alarm</string>
     <string name="alarm_name_hint">Alarm name</string>
-    <string name="search_address_hint">Search for an address</string>
+    <string name="location_label">Location</string>
+    <string name="address_hint">Enter an address</string>
+    <string name="search">Search</string>
+    <string name="current_location">Use my location</string>
+    <string name="select_location">Select location</string>
+    <string name="no_location_selected">No location selected</string>
+    <string name="radius_label">Activation radius</string>
+    <string name="options_label">Options</string>
+    <string name="sound_enabled">Sound enabled</string>
+    <string name="vibration_enabled">Vibration enabled</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="search_address_hint">Search address</string>
     <string name="search_button">Search</string>
     <string name="use_current_location">📍 Use my current location</string>
     <string name="activation_radius_label">Activation radius</string>
@@ -21,16 +34,17 @@
     <string name="cancel_button">Cancel</string>
     <string name="save_button">Save</string>
     <string name="new_alarm_title">New alarm</string>
-    <string name="edit_alarm_title">Edit alarm</string>
 
     <!-- Alarm Item -->
+    <string name="edit_alarm">Edit alarm</string>
+    <string name="delete_alarm">Delete alarm</string>
     <string name="alarm_name_default">Alarm name</string>
     <string name="gps_position">GPS position</string>
 
     <!-- Toast Messages -->
     <string name="enter_address_message">Please enter an address</string>
     <string name="address_not_found">Address not found</string>
-    <string name="address_search_error">Error searching for address</string>
+    <string name="address_search_error">Error searching address</string>
     <string name="map_loading_error">Error loading OpenStreetMap</string>
     <string name="select_position_message">Please select a position on the map or enter an address</string>
     <string name="alarm_saved">Alarm saved</string>
@@ -45,14 +59,15 @@
     <string name="location_permission_required_for_alarm">Location permissions are required to create an alarm</string>
     <string name="location_permission_required_for_map">Location permission is required to use the map</string>
     <string name="location_permission_required">Location permissions are required</string>
-    <string name="permissions_granted">Permissions granted! The application is ready to use.</string>
-    <string name="some_permissions_required">Some permissions are required for the application to function properly</string>
+    <string name="permissions_granted">Permissions granted! The app is ready to use.</string>
+    <string name="some_permissions_required">Some permissions are required for the app to work properly</string>
 
     <!-- Notifications -->
     <string name="service_notification_title">WakeMeUp active</string>
-    <string name="service_notification_text">Monitoring your location...</string>
-    <string name="alarm_notification_title">🚨 Geographic alarm!</string>
-    <string name="alarm_notification_text">You have arrived near: %1$s</string>
-    <string name="stop_alarm_action">Stop</string>
+    <string name="service_notification_content">Monitoring alarms</string>
+    <string name="alarm_notification_title">WakeMeUp Alarm</string>
+    <string name="alarm_notification_content">You have arrived at your destination!</string>
+    <string name="alarm_notification_text">You have reached your destination</string>
+    <string name="stop_alarm_action">Stop alarm</string>
 
 </resources>

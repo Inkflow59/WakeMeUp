@@ -1,52 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fillViewport="true"
+    tools:context=".AlarmEditorActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:paddingTop="120dp">
+        android:padding="16dp">
 
-        <!-- Nom de l'alarme -->
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/create_alarm_title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="24dp"
             android:hint="@string/alarm_name_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextAlarmName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Recherche d'adresse -->
+        <!-- Section Localisation -->
+        <TextView
+            android:id="@+id/textViewLocationLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/location_label"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:hint="@string/search_address_hint"
+            android:layout_marginTop="8dp"
+            android:hint="@string/address_hint"
             app:layout_constraintEnd_toStartOf="@+id/buttonSearchAddress"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutName">
+            app:layout_constraintTop_toBottomOf="@+id/textViewLocationLabel">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1" />
+                android:inputType="textPostalAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,10 +77,11 @@
             android:id="@+id/buttonSearchAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/search_button"
-            android:textAllCaps="false"
+            android:layout_marginStart="8dp"
+            android:text="@string/search"
             app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutAddress"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textInputLayoutAddress"
             app:layout_constraintTop_toTopOf="@+id/textInputLayoutAddress" />
 
         <Button
@@ -65,42 +89,35 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/use_current_location"
-            android:textAllCaps="false"
+            android:text="@string/current_location"
+            android:drawableStart="@android:drawable/ic_menu_mylocation"
+            android:drawablePadding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAddress" />
 
-        <!-- Carte OpenStreetMap -->
+        <!-- Carte -->
         <org.osmdroid.views.MapView
             android:id="@+id/mapView"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonCurrentLocation" />
 
-        <!-- Configuration du rayon -->
+        <!-- Section Rayon -->
         <TextView
-            android:id="@+id/labelRadius"
-            android:layout_width="wrap_content"
+            android:id="@+id/textViewRadiusLabel"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/activation_radius_label"
+            android:layout_marginTop="24dp"
+            android:text="@string/radius_label"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mapView" />
-
-        <TextView
-            android:id="@+id/textViewRadius"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/radius_format"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/labelRadius" />
 
         <SeekBar
             android:id="@+id/seekBarRadius"
@@ -111,47 +128,82 @@
             android:progress="100"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelRadius" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewRadiusLabel" />
 
-        <!-- Options de l'alarme -->
         <TextView
-            android:id="@+id/labelOptions"
-            android:layout_width="wrap_content"
+            android:id="@+id/textViewRadius"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/alarm_options_label"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:text="100m"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seekBarRadius" />
 
-        <LinearLayout
-            android:id="@+id/layoutOptions"
+        <!-- Section Options -->
+        <TextView
+            android:id="@+id/textViewOptionsLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical"
+            android:layout_marginTop="24dp"
+            android:text="@string/options_label"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelOptions">
+            app:layout_constraintTop_toBottomOf="@+id/textViewRadius" />
 
-            <androidx.appcompat.widget.SwitchCompat
+        <LinearLayout
+            android:id="@+id/layoutSoundOption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewOptionsLabel">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sound_enabled"
+                android:textSize="16sp" />
+
+            <Switch
                 android:id="@+id/switchSound"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:padding="8dp"
-                android:text="@string/sound_option"
+                android:checked="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutVibrationOption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutSoundOption">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/vibration_enabled"
                 android:textSize="16sp" />
 
-            <androidx.appcompat.widget.SwitchCompat
+            <Switch
                 android:id="@+id/switchVibration"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:padding="8dp"
-                android:text="@string/vibration_option"
-                android:textSize="16sp" />
+                android:checked="true" />
 
         </LinearLayout>
 
@@ -159,29 +211,30 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
             android:orientation="horizontal"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutOptions">
+            app:layout_constraintTop_toBottomOf="@+id/layoutVibrationOption"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
                 android:id="@+id/buttonCancel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:text="@string/cancel_button"
-                android:textAllCaps="false" />
+                android:layout_marginEnd="8dp"
+                android:text="@string/cancel" />
 
             <Button
                 android:id="@+id/buttonSave"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:text="@string/save_button"
-                android:textAllCaps="false" />
+                android:layout_marginStart="8dp"
+                android:text="@string/save" />
 
         </LinearLayout>
 

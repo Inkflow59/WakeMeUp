@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@drawable/card_background"
-    android:orientation="vertical"
-    android:padding="16dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -21,69 +22,70 @@
 
             <TextView
                 android:id="@+id/textViewAlarmName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/alarm_name_default"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="Nom de l'alarme" />
 
             <TextView
-                android:id="@+id/textViewLocation"
-                android:layout_width="match_parent"
+                android:id="@+id/textViewAlarmLocation"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@string/gps_position"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textColor="#666666"
+                tools:text="Localisation" />
 
             <TextView
-                android:id="@+id/textViewRadius"
-                android:layout_width="match_parent"
+                android:id="@+id/textViewAlarmRadius"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/radius_format"
-                android:textSize="14sp" />
+                android:layout_marginTop="2dp"
+                android:textSize="12sp"
+                android:textColor="#888888"
+                tools:text="Rayon: 100m" />
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchActive"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp" />
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Switch
+                android:id="@+id/switchAlarmEnabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/buttonEditAlarm"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/edit_alarm"
+                    android:src="@android:drawable/ic_menu_edit"
+                    android:layout_marginEnd="8dp" />
+
+                <ImageButton
+                    android:id="@+id/buttonDeleteAlarm"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/delete_alarm"
+                    android:src="@android:drawable/ic_menu_delete" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="end"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/buttonEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:minWidth="0dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:text="Modifier"
-            android:textAllCaps="false"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/buttonDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="0dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:text="Supprimer"
-            android:textAllCaps="false"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="12sp" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

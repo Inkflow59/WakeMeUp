@@ -1,29 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Name -->
     <string name="app_name">Wake Me Up</string>
 
     <!-- Main Activity -->
     <string name="main_title">منبهاتي GPS</string>
-    <string name="no_alarms_message">لا توجد منبهات مُكونة.\nاضغط على + لإنشاء واحد.</string>
+    <string name="no_alarms_message">لا توجد منبهات مكونة.\nاضغط على + لإنشاء واحد.</string>
     <string name="add_alarm_description">إضافة منبه</string>
 
     <!-- Alarm Editor Activity -->
+    <string name="create_alarm_title">إنشاء منبه</string>
+    <string name="edit_alarm_title">تعديل المنبه</string>
     <string name="alarm_name_hint">اسم المنبه</string>
+    <string name="location_label">الموقع</string>
+    <string name="address_hint">أدخل عنوانًا</string>
+    <string name="search">بحث</string>
+    <string name="current_location">استخدام موقعي</string>
+    <string name="select_location">اختيار الموقع</string>
+    <string name="no_location_selected">لم يتم اختيار موقع</string>
+    <string name="radius_label">نطاق التفعيل</string>
+    <string name="options_label">خيارات</string>
+    <string name="sound_enabled">الصوت مُفعل</string>
+    <string name="vibration_enabled">الاهتزاز مُفعل</string>
+    <string name="cancel">إلغاء</string>
+    <string name="save">حفظ</string>
     <string name="search_address_hint">البحث عن عنوان</string>
     <string name="search_button">بحث</string>
     <string name="use_current_location">📍 استخدام موقعي الحالي</string>
     <string name="activation_radius_label">نطاق التفعيل</string>
-    <string name="radius_format">النطاق: %1$d متر</string>
+    <string name="radius_format">النطاق: %1$dم</string>
     <string name="alarm_options_label">خيارات المنبه</string>
     <string name="sound_option">🔊 صوت</string>
     <string name="vibration_option">📳 اهتزاز</string>
     <string name="cancel_button">إلغاء</string>
     <string name="save_button">حفظ</string>
     <string name="new_alarm_title">منبه جديد</string>
-    <string name="edit_alarm_title">تعديل المنبه</string>
 
     <!-- Alarm Item -->
+    <string name="edit_alarm">تعديل المنبه</string>
+    <string name="delete_alarm">حذف المنبه</string>
     <string name="alarm_name_default">اسم المنبه</string>
     <string name="gps_position">موقع GPS</string>
 
@@ -32,7 +46,7 @@
     <string name="address_not_found">العنوان غير موجود</string>
     <string name="address_search_error">خطأ في البحث عن العنوان</string>
     <string name="map_loading_error">خطأ في تحميل OpenStreetMap</string>
-    <string name="select_position_message">يرجى تحديد موقع على الخريطة أو إدخال عنوان</string>
+    <string name="select_position_message">يرجى اختيار موقع على الخريطة أو إدخال عنوان</string>
     <string name="alarm_saved">تم حفظ المنبه</string>
     <string name="save_error">خطأ في الحفظ: %1$s</string>
     <string name="unnamed_alarm">منبه بدون اسم</string>
@@ -46,13 +60,14 @@
     <string name="location_permission_required_for_map">إذن الموقع مطلوب لاستخدام الخريطة</string>
     <string name="location_permission_required">أذونات الموقع مطلوبة</string>
     <string name="permissions_granted">تم منح الأذونات! التطبيق جاهز للاستخدام.</string>
-    <string name="some_permissions_required">بعض الأذونات مطلوبة للتشغيل السليم للتطبيق</string>
+    <string name="some_permissions_required">بعض الأذونات مطلوبة لعمل التطبيق بشكل صحيح</string>
 
     <!-- Notifications -->
     <string name="service_notification_title">WakeMeUp نشط</string>
-    <string name="service_notification_text">مراقبة موقعك...</string>
-    <string name="alarm_notification_title">🚨 منبه جغرافي!</string>
-    <string name="alarm_notification_text">لقد وصلت بالقرب من: %1$s</string>
-    <string name="stop_alarm_action">إيقاف</string>
+    <string name="service_notification_content">مراقبة المنبهات</string>
+    <string name="alarm_notification_title">منبه WakeMeUp</string>
+    <string name="alarm_notification_content">لقد وصلت إلى وجهتك!</string>
+    <string name="alarm_notification_text">لقد وصلت إلى وجهتك</string>
+    <string name="stop_alarm_action">إيقاف المنبه</string>
 
 </resources>

@@ -70,4 +70,14 @@
     <string name="alarm_notification_text">Sie haben Ihr Ziel erreicht</string>
     <string name="stop_alarm_action">Alarm stoppen</string>
 
+    <!-- Widget -->
+    <string name="app_widget_description">Widget zur Anzeige Ihrer Wake Me Up GPS-Alarme</string>
+    <string name="appwidget_text">Wake Me Up Widget</string>
+    <string name="widget_no_alarms">Keine aktiven Alarme</string>
+    <string name="widget_active_alarms">%1$d aktive Alarme</string>
+    <string name="widget_one_alarm">1 aktiver Alarm</string>
+    <string name="widget_next_alarm">Nächster: %1$s</string>
+    <string name="widget_open_app">Wake Me Up öffnen</string>
+    <string name="widget_add_alarm">Alarm hinzufügen</string>
+
 </resources>

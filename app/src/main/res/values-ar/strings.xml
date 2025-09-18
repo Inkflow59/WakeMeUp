@@ -70,4 +70,14 @@
     <string name="alarm_notification_text">لقد وصلت إلى وجهتك</string>
     <string name="stop_alarm_action">إيقاف المنبه</string>
 
+    <!-- Widget -->
+    <string name="app_widget_description">أداة لعرض منبهات GPS الخاصة بك في Wake Me Up</string>
+    <string name="appwidget_text">أداة Wake Me Up</string>
+    <string name="widget_no_alarms">لا توجد منبهات نشطة</string>
+    <string name="widget_active_alarms">%1$d منبهات نشطة</string>
+    <string name="widget_one_alarm">منبه واحد نشط</string>
+    <string name="widget_next_alarm">التالي: %1$s</string>
+    <string name="widget_open_app">فتح Wake Me Up</string>
+    <string name="widget_add_alarm">إضافة منبه</string>
+
 </resources>

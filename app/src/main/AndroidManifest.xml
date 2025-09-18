@@ -5,22 +5,14 @@
     <!-- Permissions pour la géolocalisation -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
-    <!-- Permissions pour les notifications et les réveils -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- Permissions pour les notifications et les réveils -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
-
-    <!-- Permission pour utiliser l'alarme système -->
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-
-    <!-- Permission pour les notifications (Android 13+) -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
-    <!-- Permissions pour OpenStreetMap -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" /> <!-- Permission pour utiliser l'alarme système -->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" /> <!-- Permission pour les notifications (Android 13+) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Permissions pour OpenStreetMap -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -34,30 +26,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WakeMeUp">
+        <receiver
+            android:name=".WakeMeUpWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/wake_me_up_widget_info" />
+        </receiver>
 
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".AlarmEditorActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
-
-        <!-- Service de géolocalisation en arrière-plan -->
+            android:parentActivityName=".MainActivity" /> <!-- Service de géolocalisation en arrière-plan -->
         <service
             android:name=".LocationService"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="location" />
-
-        <!-- Récepteur pour redémarrer le service après un reboot -->
+            android:foregroundServiceType="location" /> <!-- Récepteur pour redémarrer le service après un reboot -->
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"
@@ -66,7 +64,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

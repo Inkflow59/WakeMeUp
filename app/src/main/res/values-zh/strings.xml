@@ -70,4 +70,14 @@
     <string name="alarm_notification_text">您已到达目的地</string>
     <string name="stop_alarm_action">停止闹钟</string>
 
+    <!-- Widget -->
+    <string name="app_widget_description">显示您的Wake Me Up GPS闹钟的小组件</string>
+    <string name="appwidget_text">Wake Me Up小组件</string>
+    <string name="widget_no_alarms">没有活动的闹钟</string>
+    <string name="widget_active_alarms">%1$d个活动闹钟</string>
+    <string name="widget_one_alarm">1个活动闹钟</string>
+    <string name="widget_next_alarm">下一个：%1$s</string>
+    <string name="widget_open_app">打开Wake Me Up</string>
+    <string name="widget_add_alarm">添加闹钟</string>
+
 </resources>

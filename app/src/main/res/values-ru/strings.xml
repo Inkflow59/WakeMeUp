@@ -70,4 +70,14 @@
     <string name="alarm_notification_text">Вы достигли места назначения</string>
     <string name="stop_alarm_action">Остановить будильник</string>
 
+    <!-- Widget -->
+    <string name="app_widget_description">Виджет для отображения ваших GPS-будильников Wake Me Up</string>
+    <string name="appwidget_text">Виджет Wake Me Up</string>
+    <string name="widget_no_alarms">Нет активных будильников</string>
+    <string name="widget_active_alarms">%1$d активных будильников</string>
+    <string name="widget_one_alarm">1 активный будильник</string>
+    <string name="widget_next_alarm">Следующий: %1$s</string>
+    <string name="widget_open_app">Открыть Wake Me Up</string>
+    <string name="widget_add_alarm">Добавить будильник</string>
+
 </resources>

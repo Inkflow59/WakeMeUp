@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import android.util.Log
+import android.content.Intent
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 
-class AlarmRepository(context: Context) {
+class AlarmRepository(private val context: Context) {
 
     private val prefs: SharedPreferences = context.getSharedPreferences("alarm_prefs", Context.MODE_PRIVATE)
     private val TAG = "AlarmRepository"
@@ -67,6 +70,9 @@ class AlarmRepository(context: Context) {
                 putLong("alarm_${alarm.id}_created", alarm.createdAt)
             }
             Log.d(TAG, "Alarme sauvegardée avec succès: ${alarm.name}")
+
+            // Notifier le widget que les alarmes ont changé
+            notifyWidgetUpdate()
         } catch (e: Exception) {
             Log.e(TAG, "Erreur lors de la sauvegarde de l'alarme", e)
             throw e
@@ -90,6 +96,9 @@ class AlarmRepository(context: Context) {
                 remove("alarm_${alarmId}_created")
             }
             Log.d(TAG, "Alarme supprimée avec succès: $alarmId")
+
+            // Notifier le widget que les alarmes ont changé
+            notifyWidgetUpdate()
         } catch (e: Exception) {
             Log.e(TAG, "Erreur lors de la suppression de l'alarme", e)
             throw e
@@ -102,6 +111,35 @@ class AlarmRepository(context: Context) {
         } catch (e: Exception) {
             Log.e(TAG, "Erreur lors du chargement des alarmes actives", e)
             emptyList()
+        }
+    }
+
+    /**
+     * Notifie le widget que les alarmes ont été mises à jour
+     */
+    private fun notifyWidgetUpdate() {
+        try {
+            // Envoyer un broadcast intent
+            val intent = Intent("com.example.wakemeup.ALARMS_UPDATED")
+            context.sendBroadcast(intent)
+
+            // Forcer la mise à jour directe du widget
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+            val widgetComponent = ComponentName(context, WakeMeUpWidget::class.java)
+            val widgetIds = appWidgetManager.getAppWidgetIds(widgetComponent)
+
+            if (widgetIds.isNotEmpty()) {
+                val updateIntent = Intent(context, WakeMeUpWidget::class.java).apply {
+                    action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+                    putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds)
+                }
+                context.sendBroadcast(updateIntent)
+                Log.d(TAG, "Mise à jour forcée du widget envoyée pour ${widgetIds.size} widgets")
+            }
+
+            Log.d(TAG, "Notification envoyée au widget")
+        } catch (e: Exception) {
+            Log.e(TAG, "Erreur lors de l'envoi de la notification au widget", e)
         }
     }
 }

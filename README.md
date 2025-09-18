@@ -40,21 +40,17 @@
 - **Vibration**: Tactile wake-up even in silent mode
 - **Auto-Deactivation**: Alarm deactivates after triggering
 
-## 📱 Screenshots
+### 📱 Android Widget
+- **Home Screen Widget**: Quick view of active alarms directly on your home screen
+- **Real-time Updates**: Widget automatically refreshes when alarms change
+- **One-tap Access**: Direct launch to the main app from the widget
+- **Compact Display**: Shows essential information without cluttering your screen
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   📋 Alarm      │    │   🗺️ Interactive│    │   ⚙️ Alarm      │
-│   List          │    │   OSM Map       │    │   Config        │
-│                 │    │                 │    │                 │
-│ • Home          │    │    📍 Marker    │    │ Name: Office    │
-│ • Office   ✅   │    │    ⭕ Zone      │    │ Radius: 200m    │
-│ • Station  ❌   │    │                 │    │ 🔊 Sound: ON    │
-│ • Airport  ✅   │    │                 │    │ 📳 Vibr: ON     │
-│                 │    │                 │    │                 │
-│     [+]         │    │   [Save]        │    │   [Save]        │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
+### 🔄 System Integration
+- **Auto-restart**: Automatically restarts monitoring after device reboot
+- **Background Persistence**: Maintains alarm monitoring even when app is closed
+- **System Broadcasts**: Efficient communication between app components
+- **Boot Receiver**: Seamlessly resumes active alarms after system restart
 
 ## 🚀 Installation
 
@@ -99,6 +95,9 @@ The app automatically requests the following permissions:
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 <uses-permission android:name="android.permission.VIBRATE" />
 
+<!-- Auto-restart after reboot -->
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 <!-- OpenStreetMap -->
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -112,6 +111,16 @@ For optimal operation, disable battery optimization for WakeMeUp:
 1. **Settings** → **Battery** → **Battery Optimization**
 2. Search for **WakeMeUp**
 3. Select **"Don't optimize"**
+
+### Widget Setup
+
+To add the WakeMeUp widget to your home screen:
+
+1. **Long press** on your home screen
+2. Select **"Widgets"**
+3. Find **"WakeMeUp"** in the list
+4. **Drag and drop** to your desired location
+5. The widget will automatically show your active alarms
 
 ## 📖 User Guide
 
@@ -139,6 +148,7 @@ For optimal operation, disable battery optimization for WakeMeUp:
 - **✏️ Edit**: Click "Edit" to change settings
 - **🔄 Enable/Disable**: Use the switch to temporarily enable/disable
 - **🗑️ Delete**: Click "Delete" to permanently remove
+- **📱 Widget**: Monitor active alarms directly from your home screen
 
 ## 🏗️ Architecture
 
@@ -152,7 +162,10 @@ app/
 ├── 💾 AlarmRepository.kt       # Data management
 ├── 📋 AlarmAdapter.kt          # List display
 ├── 🏠 LocationAlarm.kt         # Data model
-└── 🎛️ MainViewModel.kt        # Business logic
+├── 🎛️ MainViewModel.kt        # Business logic
+├── 📱 WakeMeUpWidget.kt        # Home screen widget
+├── 🔄 BootReceiver.kt          # Auto-restart after reboot
+└── 🔐 PermissionManager.kt     # Permission management
 ```
 
 ### Technologies Used
@@ -161,18 +174,22 @@ app/
 - **Architecture**: MVVM (Model-View-ViewModel)
 - **Geolocation**: Google Play Services Location
 - **Maps**: OpenStreetMap with osmdroid
-- **Storage**: SharedPreferences + Gson
+- **Storage**: SharedPreferences
 - **Interface**: Material Design Components
 - **Services**: Foreground Service for background operation
+- **Widgets**: Android App Widget framework
+- **System Integration**: Broadcast Receivers
 
 ### Key Components
 
 | Component | Role | Technology |
 |-----------|------|-------------|
 | `LocationService` | Background GPS monitoring | FusedLocationProviderClient |
-| `AlarmRepository` | Data persistence | SharedPreferences + Gson |
+| `AlarmRepository` | Data persistence | SharedPreferences |
 | `MainActivity` | Main interface | RecyclerView + LiveData |
 | `AlarmEditorActivity` | Alarm configuration | OpenStreetMap |
+| `WakeMeUpWidget` | Home screen widget | AppWidgetProvider |
+| `BootReceiver` | Auto-restart on boot | BroadcastReceiver |
 
 ## 🔒 Privacy
 
@@ -197,6 +214,20 @@ app/
 - ✅ Add the app to **protected applications** (manufacturer dependent)
 - ✅ Check in **Settings** → **Apps** → **Special Permissions**
 
+### Widget not updating
+
+- ✅ Ensure the widget has been **added to home screen**
+- ✅ Check that the app has **notification permissions**
+- ✅ Try **removing and re-adding** the widget
+- ✅ Verify that **background app refresh** is enabled
+
+### Alarms don't restart after reboot
+
+- ✅ Grant **"Auto-start"** permission (manufacturer dependent)
+- ✅ Ensure **RECEIVE_BOOT_COMPLETED** permission is granted
+- ✅ Check that active alarms exist before restart
+- ✅ Disable **deep sleep mode** for the app
+
 ### Inaccurate GPS
 
 - ✅ Enable **high-precision location**
@@ -220,7 +251,9 @@ Contributions are welcome! To contribute:
 - 🎵 **Custom sounds** for alarms
 - 🌐 **Multi-language support**
 - ⏰ **Combined alarms** (time + location)
-- 📱 **Home screen widget**
+- 📈 **Advanced widget features** (progress bars, distance indicators)
+- 🔔 **Smart notifications** based on user patterns
+- 🗺️ **Offline maps** for better performance
 
 ## 📄 License
 
